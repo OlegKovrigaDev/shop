@@ -8,16 +8,16 @@ import {
 } from '@/components/ui/select'
 import { FC } from 'react'
 
-type Item = {
+type TItem = {
 	value: string
 	text: string
 }
-interface SelectElProps {
+interface ISelectLang {
 	placeholder?: string
-	items: Item[]
+	items: TItem[]
 }
 
-export const SelectEl: FC<SelectElProps> = ({ placeholder, items }) => {
+export const SelectLang: FC<ISelectLang> = ({ placeholder, items }) => {
 	return (
 		<Select defaultValue={items[0].value}>
 			<SelectTrigger className='w-auto border-none font-bold text-2xl bg-transparent'>

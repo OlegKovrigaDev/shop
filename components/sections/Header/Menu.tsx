@@ -1,6 +1,7 @@
 import { LayoutDashboard } from 'lucide-react'
 import { FC, ReactNode } from 'react'
-import { Button } from '../ui/button'
+import { Logo } from '../../parts/Logo'
+import { Button } from '../../ui/button'
 import {
 	Sheet,
 	SheetContent,
@@ -8,15 +9,14 @@ import {
 	SheetHeader,
 	SheetTitle,
 	SheetTrigger,
-} from '../ui/sheet'
-import { LogoEl } from './parts/LogoEl'
+} from '../../ui/sheet'
 
-type MenuProps = {
+type TMenu = {
 	text: string
 	children: ReactNode
 }
 
-export const Menu: FC<MenuProps> = ({ text, children }) => {
+export const Menu: FC<TMenu> = ({ text, children }) => {
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
@@ -32,7 +32,7 @@ export const Menu: FC<MenuProps> = ({ text, children }) => {
 			<SheetContent side={'left'} className='w-screen'>
 				<SheetHeader>
 					<SheetTitle>
-						<LogoEl />
+						<Logo />
 					</SheetTitle>
 					<SheetDescription></SheetDescription>
 				</SheetHeader>

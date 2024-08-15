@@ -6,14 +6,14 @@ import {
 import { LucideIcon } from 'lucide-react'
 import { FC, ReactNode } from 'react'
 
-type HoverMenuProps = {
+type THoverMenu = {
 	icon: LucideIcon
 	link: string
 	text: string
 	children: ReactNode
 }
 
-export const HoverMenu: FC<HoverMenuProps> = ({
+export const HoverMenu: FC<THoverMenu> = ({
 	icon: Icon,
 	link,
 	text,

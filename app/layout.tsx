@@ -1,4 +1,4 @@
-import { Layout } from '@/components/elements/sections/Layout'
+import { Layout } from '@/components/sections/Layout'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
@@ -23,7 +23,7 @@ export default function RootLayout({
 		<html lang='en'>
 			<body
 				className={cn(
-					`flex flex-col min-h-screen font-sans antialiased ${fontSans.variable}`
+					`flex flex-col min-h-screen font-sans antialiased bg-[#f8f8f8] ${fontSans.variable}`
 				)}
 			>
 				<Layout>{children}</Layout>

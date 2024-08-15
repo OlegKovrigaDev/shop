@@ -6,7 +6,7 @@ import {
 	CarouselPrevious,
 } from '@/components/ui/carousel'
 
-export const HeroSlider = () => {
+export const Slider = () => {
 	return (
 		<Carousel>
 			<CarouselContent>

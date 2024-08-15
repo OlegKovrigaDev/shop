@@ -1,7 +1,7 @@
-import { HeroSideBar, Item } from './HeroSideBar'
-import { HeroSlider } from './HeroSlider'
+import { SideBar, TItem } from './SideBar'
+import { Slider } from './Slider'
 
-const list: Item[] = [
+const list: TItem[] = [
 	{ id: 1, text: 'Кухонні меблі' },
 	{ id: 2, text: 'Меблі у вітальню' },
 	{ id: 3, text: 'Меблі у спальню' },
@@ -17,8 +17,8 @@ const list: Item[] = [
 export const Hero = () => {
 	return (
 		<section className='mt-8 flex justify-between'>
-			<HeroSideBar items={list} />
-			<HeroSlider />
+			<SideBar items={list} />
+			<Slider />
 		</section>
 	)
 }
