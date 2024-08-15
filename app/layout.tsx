@@ -1,4 +1,4 @@
-import { Layout } from '@/components/elements/Layout'
+import { Layout } from '@/components/elements/sections/Layout'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'

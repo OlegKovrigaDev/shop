@@ -1,5 +1,5 @@
+import { Search } from 'lucide-react'
 import { Input } from '../ui/input'
-import { Icon } from './Icon'
 
 export const SearchBar = () => {
 	return (
@@ -9,7 +9,7 @@ export const SearchBar = () => {
 				placeholder='Пошук'
 				className='border-none text-black pr-10'
 			/>
-			<Icon name='search' className='absolute right-[10px] text-black' />
+			<Search className='absolute right-[10px] text-black' />
 		</div>
 	)
 }

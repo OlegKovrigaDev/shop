@@ -3,18 +3,18 @@ import {
 	HoverCardContent,
 	HoverCardTrigger,
 } from '@/components/ui/hover-card'
+import { LucideIcon } from 'lucide-react'
 import { FC, ReactNode } from 'react'
-import { Icon } from './Icon'
 
 type HoverMenuProps = {
-	icon: string
+	icon: LucideIcon
 	link: string
 	text: string
 	children: ReactNode
 }
 
 export const HoverMenu: FC<HoverMenuProps> = ({
-	icon,
+	icon: Icon,
 	link,
 	text,
 	children,
@@ -25,7 +25,7 @@ export const HoverMenu: FC<HoverMenuProps> = ({
 				href={link}
 				className='w-[71px] flex flex-col items-center'
 			>
-				<Icon name={icon} />
+				<Icon />
 				<span className='text-xs'>{text}</span>
 			</HoverCardTrigger>
 			<HoverCardContent>{children}</HoverCardContent>

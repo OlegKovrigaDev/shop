@@ -1,3 +1,4 @@
+import { LayoutDashboard } from 'lucide-react'
 import { FC, ReactNode } from 'react'
 import { Button } from '../ui/button'
 import {
@@ -8,16 +9,14 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from '../ui/sheet'
-import { Icon } from './Icon'
-import { Logo } from './Logo'
+import { LogoEl } from './parts/LogoEl'
 
 type MenuProps = {
-	icon: 'menu' | 'layout-dashboard'
 	text: string
 	children: ReactNode
 }
 
-export const Menu: FC<MenuProps> = ({ icon, text, children }) => {
+export const Menu: FC<MenuProps> = ({ text, children }) => {
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
@@ -26,14 +25,14 @@ export const Menu: FC<MenuProps> = ({ icon, text, children }) => {
 					size='icon'
 					className='flex flex-col w-[71px] h-[48px] hover:bg-transparent hover:text-white'
 				>
-					<Icon name={icon} />
+					<LayoutDashboard />
 					<span className='text-xs'>{text}</span>
 				</Button>
 			</SheetTrigger>
 			<SheetContent side={'left'} className='w-screen'>
 				<SheetHeader>
 					<SheetTitle>
-						<Logo />
+						<LogoEl />
 					</SheetTitle>
 					<SheetDescription></SheetDescription>
 				</SheetHeader>
