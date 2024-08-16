@@ -26,17 +26,15 @@ export const ProductCard: FC<TProductCard> = ({
 			<img src={img} alt={title} className='w-full object-cover' />
 			<div className='absolute left-4 top-4 flex gap-2 flex-col'>
 				{[
-					{ id: 1, text: 'ХІТ', color: '#4E3A9F', condition: hit },
-
-					{ id: 2, text: 'ЗНИЖКА', color: '#D81C1B', condition: discont },
-
-					{ id: 3, text: 'НОВИНКА', color: '#3C9F3A', condition: newProduct },
+					{ id: 1, text: 'ХІТ', color: '4E3A9F', condition: hit },
+					{ id: 2, text: 'ЗНИЖКА', color: 'D81C1B', condition: discont },
+					{ id: 3, text: 'НОВИНКА', color: '3C9F3A', condition: newProduct },
 				]
 					.filter(type => type.condition)
 					.map(({ id, text, color }) => (
 						<span
 							key={id}
-							className={`bg-[${color}] px-4 py-1 text-white text-xs font-semibold w-fit`}
+							className={`bg-[#${color}] px-4 py-1 text-white text-xs font-semibold w-fit`}
 						>
 							{text}
 						</span>

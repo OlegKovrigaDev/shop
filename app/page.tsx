@@ -1,3 +1,4 @@
+import { Categories } from '@/components/parts/Categories'
 import { ProductSlider } from '@/components/parts/ProductSlider'
 import { Advantages } from '@/components/sections/Advantages'
 import { Ethaps } from '@/components/sections/Ethaps'
@@ -84,7 +85,9 @@ export default function Home() {
 			<Section title='Етапи покупки'>
 				<Ethaps />
 			</Section>
-			<Section title='Популярні категорії'></Section>
+			<Section title='Популярні категорії'>
+				<Categories />
+			</Section>
 			<Section title='Також вас може зацікавити'>
 				<ProductSlider arr={products}></ProductSlider>
 			</Section>

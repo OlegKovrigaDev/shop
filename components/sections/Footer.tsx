@@ -4,7 +4,6 @@ import { Logo } from '../parts/Logo'
 
 const footerData = [
 	{
-		title: 'Links',
 		items: [
 			{ id: 1, text: 'Доставка і Оплата', link: '/' },
 			{ id: 2, text: 'Про нас', link: '/' },
