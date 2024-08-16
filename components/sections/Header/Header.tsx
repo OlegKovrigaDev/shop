@@ -7,7 +7,7 @@ import { TopList } from './TopList'
 
 export const Header = () => {
 	return (
-		<header className='bg-[#D81C1B] text-white'>
+		<header className='bg-[#D81C1B] text-white sticky top-0 z-10'>
 			<div className='container py-6 flex items-center gap-7'>
 				<Logo />
 				<SelectLang
