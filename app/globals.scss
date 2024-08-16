@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.counter {
+	counter-reset: myCounter;
+	& li:before {
+		content: counter(myCounter);
+		counter-increment: myCounter;
+	}
+}

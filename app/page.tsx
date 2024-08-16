@@ -1,4 +1,6 @@
 import { ProductSlider } from '@/components/parts/ProductSlider'
+import { Advantages } from '@/components/sections/Advantages'
+import { Ethaps } from '@/components/sections/Ethaps'
 import { Hero } from '@/components/sections/Hero/Hero'
 import { Section } from '@/components/sections/Section'
 
@@ -79,12 +81,16 @@ export default function Home() {
 			<Section title='ХІТ продажу'>
 				<ProductSlider arr={products}></ProductSlider>
 			</Section>
-			<Section title='Етапи покупки'></Section>
+			<Section title='Етапи покупки'>
+				<Ethaps />
+			</Section>
 			<Section title='Популярні категорії'></Section>
 			<Section title='Також вас може зацікавити'>
 				<ProductSlider arr={products}></ProductSlider>
 			</Section>
-			<Section title='Чому нас обирають'></Section>
+			<Section title='Чому нас обирають' className='mb-[72px]'>
+				<Advantages />
+			</Section>
 		</div>
 	)
 }
