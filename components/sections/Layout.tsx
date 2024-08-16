@@ -1,10 +1,7 @@
-import { FC, ReactNode } from 'react'
+import { TLayout } from '@/types'
+import { FC } from 'react'
 import { Footer } from './Footer'
 import { Header } from './Header/Header'
-
-type TLayout = {
-	children: ReactNode
-}
 
 export const Layout: FC<TLayout> = ({ children }) => {
 	return (

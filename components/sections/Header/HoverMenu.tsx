@@ -3,15 +3,8 @@ import {
 	HoverCardContent,
 	HoverCardTrigger,
 } from '@/components/ui/hover-card'
-import { LucideIcon } from 'lucide-react'
+import { THoverMenu } from '@/types'
 import { FC, ReactNode } from 'react'
-
-type THoverMenu = {
-	icon: LucideIcon
-	link: string
-	text: string
-	children: ReactNode
-}
 
 export const HoverMenu: FC<THoverMenu> = ({
 	icon: Icon,

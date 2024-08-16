@@ -1,5 +1,6 @@
+import { TMenu } from '@/types'
 import { LayoutDashboard } from 'lucide-react'
-import { FC, ReactNode } from 'react'
+import { FC } from 'react'
 import { Logo } from '../../parts/Logo'
 import { Button } from '../../ui/button'
 import {
@@ -10,11 +11,6 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from '../../ui/sheet'
-
-type TMenu = {
-	text: string
-	children: ReactNode
-}
 
 export const Menu: FC<TMenu> = ({ text, children }) => {
 	return (

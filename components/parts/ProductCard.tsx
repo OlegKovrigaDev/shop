@@ -1,16 +1,6 @@
+import { TProductCard } from '@/types'
 import { ShoppingCart } from 'lucide-react'
 import { FC } from 'react'
-
-export type TProductCard = {
-	id: number
-	img: string
-	title: string
-	oldPrice?: number
-	newPrice: number
-	hit?: boolean
-	discont?: boolean
-	newProduct?: boolean
-}
 
 export const ProductCard: FC<TProductCard> = ({
 	img,

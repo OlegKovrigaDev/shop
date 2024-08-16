@@ -6,16 +6,8 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
+import { ISelectLang } from '@/types'
 import { FC } from 'react'
-
-type TItem = {
-	value: string
-	text: string
-}
-interface ISelectLang {
-	placeholder?: string
-	items: TItem[]
-}
 
 export const SelectLang: FC<ISelectLang> = ({ placeholder, items }) => {
 	return (

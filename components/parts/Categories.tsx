@@ -1,11 +1,4 @@
-const categories = [
-	{ id: 1, name: 'Кухні', image: '/Categories/Cat1.jpg', rowSpan: 2 },
-	{ id: 2, name: 'Шафи', image: '/Categories/Cat2.jpg' },
-	{ id: 3, name: 'Офісні меблі', image: '/Categories/Cat3.jpg' },
-	{ id: 4, name: 'Ліжка', image: '/Categories/Cat2.jpg' },
-	{ id: 5, name: 'Дивани', image: '/Categories/Cat1.jpg', rowSpan: 2 },
-	{ id: 6, name: 'Комоди і тумби', image: '/Categories/Cat3.jpg' },
-]
+import { categories } from '@/constants'
 
 export const Categories = () => (
 	<div className='grid grid-cols-2 gap-4'>

@@ -5,12 +5,9 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 } from '@/components/ui/carousel'
+import { TProductSlider } from '@/types'
 import { FC } from 'react'
-import { ProductCard, TProductCard } from './ProductCard'
-
-type TProductSlider = {
-	arr: TProductCard[]
-}
+import { ProductCard } from './ProductCard'
 
 export const ProductSlider: FC<TProductSlider> = ({ arr }) => {
 	return (
