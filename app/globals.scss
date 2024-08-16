@@ -9,3 +9,20 @@
 		counter-increment: myCounter;
 	}
 }
+
+@keyframes marquee {
+	100% {
+	  transform: translateX(100%);
+	}
+	0% {
+	  transform: translateX(-100%);
+	}
+  }
+  
+  .animate-marquee {
+	display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	animation: marquee 20s linear infinite;
+  }
+  
