@@ -12,7 +12,7 @@ export const ProductCard: FC<TProductCard> = ({
   newProduct,
 }) => {
   return (
-    <div className="bg-white rounded-md min-h-[444px] max-w-[280px] flex flex-col justify-between relative">
+    <div className="bg-white rounded-md min-h-[444px] flex flex-col justify-between relative">
       <img src={img} alt={title} className="w-full object-cover" />
       <div className="absolute left-4 top-4 flex gap-2 flex-col">
         {[

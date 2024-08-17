@@ -1,6 +1,7 @@
 import { fetchCategoryId, fetchCategoryItems } from "@/api/index";
 import { CategoryPageProps, TItems } from "@/types";
 import { ProductCard } from "@/components/parts/ProductCard";
+import { CrumbsLink } from "@/components/parts/CrumbsLink";
 
 const CategoryPage = async ({ params }: CategoryPageProps) => {
   const { id } = params;
@@ -11,16 +12,21 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
 
   return (
     <div className="container">
-      <p className="text-2xl font-bold mb-4">{categories.category.name}</p>
+      <CrumbsLink categories={categories} items={items} />
       <div className="flex flex-1 flex-wrap gap-3 md:basis-1/2 lg:basis-1/3">
-        {items.map((item) => (
-          <ProductCard
-            key={item.offerId}
-            title={item.params.GoodName}
-            oldPrice={item.params.RetailPriceWithDiscount}
-            newPrice={item.params.RetailPrice}
-          />
-        ))}
+        {items.map(
+          ({
+            offerId,
+            params: { GoodName, RetailPrice, RetailPriceWithDiscount },
+          }) => (
+            <ProductCard
+              key={offerId}
+              title={GoodName}
+              oldPrice={RetailPriceWithDiscount}
+              newPrice={RetailPrice}
+            />
+          )
+        )}
       </div>
     </div>
   );

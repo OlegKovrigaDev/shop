@@ -1,5 +1,5 @@
 import axiosClient from "./axios";
-import { TItem, TItems, TOleg } from "@/types";
+import { TItem, TItems, TCategory } from "@/types";
 
 // category
 export const fetchCategories = async (): Promise<TItem[]> => {
@@ -26,9 +26,9 @@ export const fetchCategoryItems = async (
   }
 };
 
-export const fetchCategoryId = async (id: string): Promise<TOleg> => {
+export const fetchCategoryId = async (id: string): Promise<TCategory> => {
   try {
-    const response = await axiosClient.get<TOleg>(`/Category/${id}`);
+    const response = await axiosClient.get<TCategory>(`/Category/${id}`);
     return response.data;
   } catch (error) {
     throw new Error(`Failed to fetch category with id ${id}.`);

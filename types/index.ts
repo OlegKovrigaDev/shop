@@ -50,12 +50,25 @@ export type TItem = {
   id: string;
   name: string;
 };
-export type TOleg = {
+export type TCategory = {
   id: string;
   category: {
     name: string;
   };
 };
+
+export type TCrumbs = {
+  categories: TCategoriesItem;
+  items: TItems[];
+};
+
+type TCategoriesItem = {
+  id: string;
+  category: {
+    name: string;
+  };
+};
+
 export type TSideBar = {
   items: TItem[];
 };

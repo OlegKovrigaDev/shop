@@ -11,6 +11,7 @@ export const Layout: FC<TLayout> = ({ children }) => {
       <Header />
       <main className="container">{children}</main>
       <Footer />
+      
     </>
   );
 };
