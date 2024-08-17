@@ -1,65 +1,75 @@
-import { LucideIcon } from 'lucide-react'
-import { ReactNode } from 'react'
+import { LucideIcon } from "lucide-react";
+import { ReactNode } from "react";
 
 export type TProductCard = {
-	id: number
-	img: string
-	title: string
-	oldPrice?: number
-	newPrice: number
-	hit?: boolean
-	discont?: boolean
-	newProduct?: boolean
-}
+  id: number;
+  img: string;
+  title: string;
+  oldPrice?: number;
+  newPrice: number;
+  hit?: boolean;
+  discont?: boolean;
+  newProduct?: boolean;
+};
 
 export type TProductSlider = {
-	arr: TProductCard[]
-}
+  arr: TProductCard[];
+};
 
 export type TTitle = {
-	children: ReactNode
-}
+  children: ReactNode;
+};
 
 export type TSection = {
-	title: string
-	children?: ReactNode
-	className?: string
-}
+  title: string;
+  children?: ReactNode;
+  className?: string;
+};
 
 export type TLayout = {
-	children: ReactNode
-}
+  children: ReactNode;
+};
 
 export type TItem = {
-	id: number
-	text: string
-}
+  id: number;
+  name: string;
+};
 
 export type TSideBar = {
-	items: TItem[]
-}
+  items: TItem[];
+};
 
 export type TCartPopup = {
-	text: string
-}
+  text: string;
+};
 
 export type THoverMenu = {
-	icon: LucideIcon
-	link: string
-	text: string
-	children: ReactNode
-}
+  icon: LucideIcon;
+  link: string;
+  text: string;
+  children: ReactNode;
+};
 
 export type TMenu = {
-	text: string
-	children: ReactNode
-}
+  children: ReactNode;
+};
 
 export type TItemLang = {
-	value: string
-	text: string
-}
+  value: string;
+  text: string;
+};
 export interface ISelectLang {
-	placeholder?: string
-	items: TItemLang[]
+  placeholder?: string;
+  items: TItemLang[];
+}
+
+interface SubCategory {
+  id: number;
+  name: string;
+}
+
+interface Category {
+  id: number;
+  name: string;
+  subcategories: SubCategory[];
 }
