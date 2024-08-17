@@ -2,7 +2,7 @@
 
 import { FC, useState, useEffect } from "react";
 import Link from "next/link";
-import axiosClient from "../../../services/api/axios";
+import { fetchCategories } from "../../../api/index";
 import { TItem } from "@/types";
 
 export const SideBar: FC = () => {
@@ -11,10 +11,10 @@ export const SideBar: FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const loadCategories = async () => {
       try {
-        const response = await axiosClient.get<TItem[]>("/category");
-        setFetchedItems(response.data);
+        const categories = await fetchCategories();
+        setFetchedItems(categories);
       } catch (error) {
         setError("Something went wrong.");
       } finally {
@@ -22,7 +22,7 @@ export const SideBar: FC = () => {
       }
     };
 
-    fetchData();
+    loadCategories();
   }, []);
 
   if (loading) {
@@ -37,7 +37,7 @@ export const SideBar: FC = () => {
     <ul className="w-full max-w-72 font-medium flex flex-col gap-4">
       {fetchedItems.map(({ id, name }) => (
         <li key={id}>
-          <Link href="/">{name}</Link>
+          <Link href={`/catalog/${id}`}>{name}</Link>
         </li>
       ))}
     </ul>

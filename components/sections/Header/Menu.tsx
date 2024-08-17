@@ -11,7 +11,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../../ui/sheet";
-import { SideBar } from "../Hero/SideBar";
 
 export const Menu: FC<TMenu> = ({ children }) => {
   return (
@@ -23,13 +22,13 @@ export const Menu: FC<TMenu> = ({ children }) => {
           className="flex flex-col w-[71px] h-[48px] hover:bg-transparent hover:text-white"
         >
           <LayoutDashboard />
+          <span className="text-xs font-semibold">Каталог</span>
         </Button>
       </SheetTrigger>
       <SheetContent side={"left"} className="w-screen">
         <SheetHeader>
           <SheetTitle>
             <Logo />
-            <SideBar />
           </SheetTitle>
           <SheetDescription></SheetDescription>
         </SheetHeader>

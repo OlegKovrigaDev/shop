@@ -2,11 +2,11 @@ import { LucideIcon } from "lucide-react";
 import { ReactNode } from "react";
 
 export type TProductCard = {
-  id: number;
-  img: string;
+  id?: string;
+  img?: string;
   title: string;
-  oldPrice?: number;
-  newPrice: number;
+  oldPrice?: string;
+  newPrice?: string;
   hit?: boolean;
   discont?: boolean;
   newProduct?: boolean;
@@ -30,11 +30,32 @@ export type TLayout = {
   children: ReactNode;
 };
 
-export type TItem = {
-  id: number;
+export type TItems = {
   name: string;
+  id: number;
+  offerId: string;
+  type: string;
+  available: boolean;
+  currencyId: string;
+  categoryId: number;
+  params: {
+    GoodName: string;
+    RetailPrice: string;
+    RetailPriceWithDiscount: string;
+    [other: string]: string;
+  };
 };
 
+export type TItem = {
+  id: string;
+  name: string;
+};
+export type TOleg = {
+  id: string;
+  category: {
+    name: string;
+  };
+};
 export type TSideBar = {
   items: TItem[];
 };
@@ -63,13 +84,8 @@ export interface ISelectLang {
   items: TItemLang[];
 }
 
-interface SubCategory {
-  id: number;
-  name: string;
-}
-
-interface Category {
-  id: number;
-  name: string;
-  subcategories: SubCategory[];
-}
+export type CategoryPageProps = {
+  params: {
+    id: string;
+  };
+};

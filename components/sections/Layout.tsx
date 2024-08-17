@@ -2,12 +2,12 @@ import { TLayout } from "@/types";
 import { FC } from "react";
 import { Footer } from "./Footer";
 import { Header } from "./Header/Header";
-import Add from "../parts/Add";
+import { Ad } from "../parts/Ad";
 
 export const Layout: FC<TLayout> = ({ children }) => {
   return (
     <>
-      <Add />
+      <Ad />
       <Header />
       <main className="container">{children}</main>
       <Footer />
