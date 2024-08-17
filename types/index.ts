@@ -1,65 +1,91 @@
-import { LucideIcon } from 'lucide-react'
-import { ReactNode } from 'react'
+import { LucideIcon } from "lucide-react";
+import { ReactNode } from "react";
 
 export type TProductCard = {
-	id: number
-	img: string
-	title: string
-	oldPrice?: number
-	newPrice: number
-	hit?: boolean
-	discont?: boolean
-	newProduct?: boolean
-}
+  id?: string;
+  img?: string;
+  title: string;
+  oldPrice?: string;
+  newPrice?: string;
+  hit?: boolean;
+  discont?: boolean;
+  newProduct?: boolean;
+};
 
 export type TProductSlider = {
-	arr: TProductCard[]
-}
+  arr: TProductCard[];
+};
 
 export type TTitle = {
-	children: ReactNode
-}
+  children: ReactNode;
+};
 
 export type TSection = {
-	title: string
-	children?: ReactNode
-	className?: string
-}
+  title: string;
+  children?: ReactNode;
+  className?: string;
+};
 
 export type TLayout = {
-	children: ReactNode
-}
+  children: ReactNode;
+};
+
+export type TItems = {
+  name: string;
+  id: number;
+  offerId: string;
+  type: string;
+  available: boolean;
+  currencyId: string;
+  categoryId: number;
+  params: {
+    GoodName: string;
+    RetailPrice: string;
+    RetailPriceWithDiscount: string;
+    [other: string]: string;
+  };
+};
 
 export type TItem = {
-	id: number
-	text: string
-}
-
+  id: string;
+  name: string;
+};
+export type TOleg = {
+  id: string;
+  category: {
+    name: string;
+  };
+};
 export type TSideBar = {
-	items: TItem[]
-}
+  items: TItem[];
+};
 
 export type TCartPopup = {
-	text: string
-}
+  text: string;
+};
 
 export type THoverMenu = {
-	icon: LucideIcon
-	link: string
-	text: string
-	children: ReactNode
-}
+  icon: LucideIcon;
+  link: string;
+  text: string;
+  children: ReactNode;
+};
 
 export type TMenu = {
-	text: string
-	children: ReactNode
-}
+  children: ReactNode;
+};
 
 export type TItemLang = {
-	value: string
-	text: string
-}
+  value: string;
+  text: string;
+};
 export interface ISelectLang {
-	placeholder?: string
-	items: TItemLang[]
+  placeholder?: string;
+  items: TItemLang[];
 }
+
+export type CategoryPageProps = {
+  params: {
+    id: string;
+  };
+};

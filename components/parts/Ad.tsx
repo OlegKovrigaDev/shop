@@ -1,4 +1,4 @@
-const Add = () => {
+export const Ad = () => {
     return (
       <div className="relative bg-gray-100 text-center overflow-hidden">
           <div className="whitespace-nowrap animate-marquee">
@@ -11,5 +11,5 @@ const Add = () => {
     );
   };
   
-  export default Add;
+ 
   
