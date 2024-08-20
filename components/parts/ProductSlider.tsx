@@ -19,14 +19,14 @@ export const ProductSlider: FC<TProductSlider> = ({ arr }) => {
 		>
 			<CarouselContent>
 				{arr.map(item => (
-					<CarouselItem key={item.id} className='p-0 md:basis-1/2 lg:basis-1/4'>
-						<div className='flex justify-center'>
+					<CarouselItem key={item.id} className='md:basis-1/2 lg:basis-1/4'>
+						<div className='p-1 flex justify-center'>
 							<ProductCard {...item} />
 						</div>
 					</CarouselItem>
 				))}
 			</CarouselContent>
-			<CarouselPrevious className='absolute left-[2px]' />
+			<CarouselPrevious className='absolute left-2' />
 			<CarouselNext className='absolute right-2' />
 		</Carousel>
 	)
