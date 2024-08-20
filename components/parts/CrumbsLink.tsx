@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import {
@@ -5,34 +6,39 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
 } from "../ui/breadcrumb";
 import { TCrumbs } from "@/types";
 
 export const CrumbsLink: React.FC<TCrumbs> = ({ categories, items }) => {
   return (
-    <Breadcrumb>
-      <BreadcrumbList>
+    <Breadcrumb className="py-7">
+      <BreadcrumbList className="text-lg">
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
             <Link href="/">Головна</Link>
           </BreadcrumbLink>
+          <BreadcrumbSeparator />
         </BreadcrumbItem>
         <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href={`/Category/${categories.id}`}>
-              {categories.category.name}
-            </Link>
-          </BreadcrumbLink>
+          <BreadcrumbPage>
+            <BreadcrumbLink asChild>
+              <Link href={`/Category/${categories.id}`}>
+                {categories.category.name}
+              </Link>
+            </BreadcrumbLink>
+          </BreadcrumbPage>
+          <BreadcrumbSeparator />
         </BreadcrumbItem>
-        <BreadcrumbItem>
+        {/* <BreadcrumbItem>
           <BreadcrumbLink asChild>
             <Link href={`/Category/${categories.id}`}>
               {items[1].params.GoodName}
             </Link>
           </BreadcrumbLink>
-        </BreadcrumbItem>
+        </BreadcrumbItem> */}
       </BreadcrumbList>
     </Breadcrumb>
   );
 };
-
