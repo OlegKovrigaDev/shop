@@ -63,7 +63,7 @@ export type TCrumbs = {
 };
 
 type TCategoriesItem = {
-  id: string;
+  id: string | null;
   category: {
     name: string;
   };

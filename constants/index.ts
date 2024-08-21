@@ -79,9 +79,9 @@ export const categories = [
 export const footerData = [
 	{
 		items: [
-			{ id: 1, text: 'Доставка і Оплата', link: '/' },
+			{ id: 1, text: 'Доставка і Оплата', link: '/dostavka-i-oplata' },
 			{ id: 2, text: 'Про нас', link: '/' },
-			{ id: 3, text: 'Акції', link: '/' },
+			{ id: 3, text: 'Гарантія та Повернення', link: '/warranty' },
 		],
 	},
 	{
