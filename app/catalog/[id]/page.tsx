@@ -29,12 +29,12 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
 					{items.map(
 						({
 							offerId,
-							params: { GoodName, RetailPrice, RetailPriceWithDiscount },
+							params: { FashionName, RetailPrice, RetailPriceWithDiscount },
 						}) => (
 							<ProductCard
 								key={offerId}
 								img='/slide1-min.jpg'
-								title={GoodName}
+								title={FashionName}
 								oldPrice={RetailPriceWithDiscount}
 								newPrice={RetailPrice}
 							/>
