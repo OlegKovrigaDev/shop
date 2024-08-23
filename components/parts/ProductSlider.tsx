@@ -9,7 +9,7 @@ import { TProductSlider } from '@/types'
 import { FC } from 'react'
 import { ProductCard } from './ProductCard'
 
-export const ProductSlider: FC<TProductSlider> = ({ arr }) => {
+export const 	ProductSlider: FC<TProductSlider> = ({ arr }) => {
 	return (
 		<Carousel
 			opts={{

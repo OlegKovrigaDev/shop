@@ -102,3 +102,7 @@ export type CategoryPageProps = {
     id: string;
   };
 };
+
+export type TopListProps = {
+  className?: string;
+};

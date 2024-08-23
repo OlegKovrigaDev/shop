@@ -9,7 +9,24 @@ import { TopList } from "./TopList";
 export const Header = () => {
   return (
     <header className="bg-[#D81C1B] text-white sticky top-0 z-10">
-      <div className="container py-6 flex items-center gap-7">
+      <div className="container flex py-4 items-center justify-between md:hidden">
+        <Logo />
+        <SelectLang
+          items={[
+            { value: "ua", text: "UA" },
+            { value: "ru", text: "RU" },
+          ]}
+        />
+        <div className="flex items-center gap-2">
+          <SearchBar />
+          <TopList />
+          <Menu>
+            <SideBar />
+          </Menu>
+        </div>
+      </div>
+
+      <div className="container py-6 items-center gap-7 hidden md:flex">
         <Logo />
         <SelectLang
           items={[

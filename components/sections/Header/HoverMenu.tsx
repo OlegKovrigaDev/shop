@@ -19,7 +19,7 @@ export const HoverMenu: FC<THoverMenu> = ({
 				className='w-[71px] flex flex-col items-center'
 			>
 				<Icon />
-				<span className='text-xs'>{text}</span>
+				<span className='text-xs hidden md:flex'>{text}</span>
 			</HoverCardTrigger>
 			<HoverCardContent>{children}</HoverCardContent>
 		</HoverCard>

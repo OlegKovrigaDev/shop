@@ -28,8 +28,8 @@ export const SideBar: FC = () => {
 
   if (loading) {
     return (
-      <ul className="w-full max-w-72 font-medium flex flex-col gap-4">
-        {Array.from({ length: 5 }).map((_, index) => (
+      <ul className="w-full max-w-72 font-medium flex-col gap-4 hidden lg:flex">
+        {Array.from({ length: 10 }).map((_, index) => (
           <li key={index}>
             <Skeleton className="h-[24px] w-full bg-stone-200" />
           </li>
@@ -39,14 +39,14 @@ export const SideBar: FC = () => {
   }
 
   if (error) {
-    return <p className="min-w-72">Помилка: {error}</p>;
+    return <p className="min-w-72 lg:block hidden">Помилка: {error}</p>;
   }
 
   return (
-    <ul className="w-full max-w-72 font-medium flex flex-col gap-4">
+    <ul className="w-full max-w-72 font-medium flex-col gap-4 hidden lg:flex">
       {fetchedItems.map(({ id, name }) => (
         <li key={id}>
-          <Link href={`/catalog/${id}`}>{name}</Link>
+          <Link href={`/catalog/${id}`}>{name} </Link>
         </li>
       ))}
     </ul>

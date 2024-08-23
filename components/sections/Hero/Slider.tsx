@@ -18,7 +18,7 @@ export const Slider = () => {
                 alt="img"
                 className="w-full h-[432px] object-cover rounded-md"
               />
-              <p className="font-semibold text-2xl absolute z-10 left-8 bottom-8 bg-black bg-opacity-50 text-white rounded-tr-lg  py-2 px-4 max-w-lg">
+              <p className="font-semibold text-2xl absolute z-10 left-8 bottom-8 right-6 bg-black bg-opacity-50 text-white rounded py-1 px-2 md:py-2 md:px-4 max-w-lg">
                 Купуйте будь-яке крісло або диван і отримайте подушку у
                 подарунок
               </p>

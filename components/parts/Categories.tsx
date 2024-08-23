@@ -1,7 +1,7 @@
 import { categories } from '@/constants'
 
 export const Categories = () => (
-	<div className='grid grid-cols-2 gap-4'>
+	<div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
 		{categories.map(({ id, name, image, rowSpan }) => (
 			<div
 				key={id}

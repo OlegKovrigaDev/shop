@@ -1,5 +1,5 @@
 import { TMenu } from "@/types";
-import { LayoutDashboard } from "lucide-react";
+import { LayoutDashboard, MenuIcon } from "lucide-react";
 import { FC } from "react";
 import { Logo } from "../../parts/Logo";
 import { Button } from "../../ui/button";
@@ -19,10 +19,11 @@ export const Menu: FC<TMenu> = ({ children }) => {
         <Button
           variant="ghost"
           size="icon"
-          className="flex flex-col w-[71px] h-[48px] hover:bg-transparent hover:text-white"
+          className="flex-col w-[71px] h-[48px] hover:bg-transparent hover:text-white flex"
         >
-          <LayoutDashboard />
-          <span className="text-xs font-semibold">Каталог</span>
+          <MenuIcon className="block md:hidden" />
+          <LayoutDashboard className="hidden md:block" />
+          <span className="hidden md:block text-xs font-semibold">Каталог</span>
         </Button>
       </SheetTrigger>
       <SheetContent side={"left"} className="w-screen">
