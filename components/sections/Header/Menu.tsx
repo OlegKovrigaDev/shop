@@ -19,7 +19,7 @@ export const Menu: FC<TMenu> = ({ children }) => {
         <Button
           variant="ghost"
           size="icon"
-          className="flex-col w-[71px] h-[48px] hover:bg-transparent hover:text-white flex"
+          className="flex-col h-[48px] md:w-[71px] hover:bg-transparent hover:text-white flex"
         >
           <MenuIcon className="block md:hidden" />
           <LayoutDashboard className="hidden md:block" />

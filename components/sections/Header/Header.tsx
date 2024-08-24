@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { Logo } from "../../parts/Logo";
 import { SideBar } from "../Hero/SideBar";
 import { Menu } from "./Menu";
@@ -7,22 +8,32 @@ import { SelectLang } from "./SelectLang";
 import { TopList } from "./TopList";
 
 export const Header = () => {
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
+
   return (
     <header className="bg-[#D81C1B] text-white sticky top-0 z-10">
-      <div className="container flex py-4 items-center justify-between md:hidden">
-        <Logo />
-        <SelectLang
-          items={[
-            { value: "ua", text: "UA" },
-            { value: "ru", text: "RU" },
-          ]}
-        />
-        <div className="flex items-center gap-2">
-          <SearchBar />
-          <TopList />
-          <Menu>
-            <SideBar />
-          </Menu>
+      <div className="container flex py-4 items-center justify-between md:hidden relative">
+        {!isSearchVisible && (
+          <>
+            <Logo />
+            <SelectLang
+              items={[
+                { value: "ua", text: "UA" },
+                { value: "ru", text: "RU" },
+              ]}
+            />
+          </>
+        )}
+        <div className="flex items-center gap-2 ml-auto w-full">
+          <SearchBar onSearchToggle={setIsSearchVisible} />
+          {!isSearchVisible && (
+            <>
+              <TopList />
+              <Menu>
+                <SideBar />
+              </Menu>
+            </>
+          )}
         </div>
       </div>
 
@@ -37,7 +48,7 @@ export const Header = () => {
         <Menu>
           <SideBar />
         </Menu>
-        <SearchBar />
+        <SearchBar onSearchToggle={() => {}} />
         <TopList />
       </div>
     </header>

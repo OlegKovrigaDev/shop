@@ -3,7 +3,9 @@ import { Input } from "../../ui/input";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 
-export const SearchBar: React.FC = () => {
+export const SearchBar: React.FC<{
+  onSearchToggle: (isVisible: boolean) => void;
+}> = ({ onSearchToggle }) => {
   const [query, setQuery] = useState<string>("");
   const [isMobileSearchVisible, setIsMobileSearchVisible] =
     useState<boolean>(false);
@@ -13,6 +15,7 @@ export const SearchBar: React.FC = () => {
     if (query.trim()) {
       console.log("Searching for:", query);
       setIsMobileSearchVisible(false);
+      onSearchToggle(false);
     }
   };
 
@@ -23,7 +26,9 @@ export const SearchBar: React.FC = () => {
   };
 
   const toggleSearchInput = () => {
-    setIsMobileSearchVisible((prev) => !prev);
+    const nextVisibility = !isMobileSearchVisible;
+    setIsMobileSearchVisible(nextVisibility);
+    onSearchToggle(nextVisibility);
   };
 
   useEffect(() => {
@@ -33,6 +38,7 @@ export const SearchBar: React.FC = () => {
         !inputRef.current.contains(event.target as Node)
       ) {
         setIsMobileSearchVisible(false);
+        onSearchToggle(false);
       }
     };
 
@@ -56,7 +62,7 @@ export const SearchBar: React.FC = () => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="border-transparent rounded w-full max-w-xs min-w-[100px] focus:ring-blue-500 text-black"
+              className="border-transparent rounded w-full focus:ring-blue-500 text-black"
               placeholder="Пошук..."
               autoFocus
             />
@@ -64,18 +70,19 @@ export const SearchBar: React.FC = () => {
             <Button
               onClick={toggleSearchInput}
               variant="ghost"
-              className="hover:bg-transparent hover:text-white"
+              className="hover:bg-transparent hover:text-white ml-auto"
             >
               <Search className="text-white" />
             </Button>
           )}
           {isMobileSearchVisible && (
-            <div
+            <Button
+              variant="ghost"
               className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
               onClick={handleSearch}
             >
               <Search className="text-black" />
-            </div>
+            </Button>
           )}
         </div>
 
@@ -89,12 +96,13 @@ export const SearchBar: React.FC = () => {
             className="pl-2 py-2 border-transparent rounded w-full focus:ring-blue-500 text-black"
             placeholder="Пошук..."
           />
-          <div
+          <Button
+            variant="ghost"
             className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
             onClick={handleSearch}
           >
             <Search className="text-black" />
-          </div>
+          </Button>
         </div>
       </div>
     </div>
