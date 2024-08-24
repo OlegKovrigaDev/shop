@@ -1,30 +1,15 @@
 "use client";
-
-import { TItem } from "@/types";
+import { FC } from "react";
 import Link from "next/link";
-import { FC, useEffect, useState } from "react";
-import { fetchCategories } from "../../../api/index";
 import { Skeleton } from "../../ui/skeleton";
+import { useCategories } from "../../../hooks/useCategories";
 
-export const SideBar: FC = () => {
-  const [fetchedItems, setFetchedItems] = useState<TItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+type SideBarProps = {
+  openSidebar?: () => void;
+};
 
-  useEffect(() => {
-    const loadCategories = async () => {
-      try {
-        const categories = await fetchCategories();
-        setFetchedItems(categories);
-      } catch (error) {
-        setError("Something went wrong.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadCategories();
-  }, []);
+export const SideBar: FC<SideBarProps> = ({ openSidebar }) => {
+  const { fetchedItems, loading, error } = useCategories();
 
   const getSkeletonWidth = (textLength: number) => {
     const avgCharWidth = 16;
@@ -60,6 +45,11 @@ export const SideBar: FC = () => {
           <Link href={`/catalog/${id}`}>{name}</Link>
         </li>
       ))}
+      <li>
+        <button className="text-blue-500 hover:underline" onClick={openSidebar}>
+          Перейти до повного каталогу {">"}
+        </button>
+      </li>
     </ul>
   );
 };

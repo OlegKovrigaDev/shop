@@ -106,3 +106,8 @@ export type CategoryPageProps = {
 export type TopListProps = {
   className?: string;
 };
+
+export type MenuProps = {
+  children: ReactNode;
+  openSidebar?: () => void;
+};
