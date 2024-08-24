@@ -29,7 +29,7 @@ export const Header = () => {
           {!isSearchVisible && (
             <>
               <TopList />
-              <Menu>
+              <Menu title='Каталог'>
                 <SideBar />
               </Menu>
             </>
@@ -45,7 +45,7 @@ export const Header = () => {
             { value: "ru", text: "RU" },
           ]}
         />
-        <Menu>
+        <Menu title="Каталог">
           <SideBar />
         </Menu>
         <SearchBar onSearchToggle={() => {}} />

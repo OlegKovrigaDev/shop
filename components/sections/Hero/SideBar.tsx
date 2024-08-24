@@ -3,9 +3,10 @@ import { FC } from "react";
 import Link from "next/link";
 import { Skeleton } from "../../ui/skeleton";
 import { useCategories } from "../../../hooks/useCategories";
+import { Menu } from "../Header/Menu";
 
 type SideBarProps = {
-  openSidebar?: () => void;
+  openSidebar?: boolean;
 };
 
 export const SideBar: FC<SideBarProps> = ({ openSidebar }) => {
@@ -46,9 +47,16 @@ export const SideBar: FC<SideBarProps> = ({ openSidebar }) => {
         </li>
       ))}
       <li>
-        <button className="text-blue-500 hover:underline" onClick={openSidebar}>
-          Перейти до повного каталогу {">"}
-        </button>
+        {openSidebar && (
+          <Menu
+            title="Всі категорії >"
+            classNameText="md:text-[15px]"
+            className="flex-row justify-start hover:text-blue-500 md:w-full md:h-6"
+            classNameIcon="md:hidden"
+          >
+            <SideBar />
+          </Menu>
+        )}
       </li>
     </ul>
   );

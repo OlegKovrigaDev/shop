@@ -19,8 +19,8 @@ export const CrumbsLink: React.FC<TCrumbs> = ({ categories, items }) => {
           <BreadcrumbLink asChild>
             <Link href="/">Головна</Link>
           </BreadcrumbLink>
-          <BreadcrumbSeparator />
         </BreadcrumbItem>
+        <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbPage>
             <BreadcrumbLink asChild>
