@@ -26,12 +26,23 @@ export const SideBar: FC = () => {
     loadCategories();
   }, []);
 
+  const getSkeletonWidth = (textLength: number) => {
+    const avgCharWidth = 16;
+    return Math.max(80, textLength * avgCharWidth);
+  };
+
   if (loading) {
     return (
       <ul className="w-full max-w-72 font-medium flex-col gap-4 hidden lg:flex">
         {Array.from({ length: 10 }).map((_, index) => (
           <li key={index}>
-            <Skeleton className="h-[24px] w-full bg-stone-200" />
+            <Skeleton
+              className="h-[24px]"
+              style={{
+                width: `${getSkeletonWidth(10)}px`,
+                background: "#e2e8f0",
+              }}
+            />
           </li>
         ))}
       </ul>
@@ -46,7 +57,7 @@ export const SideBar: FC = () => {
     <ul className="w-full max-w-72 font-medium flex-col gap-4 hidden lg:flex">
       {fetchedItems.map(({ id, name }) => (
         <li key={id}>
-          <Link href={`/catalog/${id}`}>{name} </Link>
+          <Link href={`/catalog/${id}`}>{name}</Link>
         </li>
       ))}
     </ul>
