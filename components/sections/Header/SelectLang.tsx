@@ -7,9 +7,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ISelectLang } from "@/types";
-import { FC } from "react";
 
-export const SelectLang: FC<ISelectLang> = ({ placeholder, items }) => {
+export const SelectLang = ({ placeholder, items }: ISelectLang) => {
   return (
     <Select defaultValue={items[0].value}>
       <SelectTrigger className="w-auto border-none font-bold text-lg md:text-2xl bg-transparent">
