@@ -23,7 +23,7 @@ export default function RootLayout({
 		<html lang='uk'>
 			<body
 				className={cn(
-					`flex flex-col min-h-screen font-sans antialiased bg-[#f8f8f8] ${fontSans.variable}`
+					`flex flex-col min-h-screen font-sans antialiased bg-[#f8f8f8] ${fontSans.variable} relative`
 				)}
 			>
 				<Layout>{children}</Layout>

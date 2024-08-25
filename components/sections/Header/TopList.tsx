@@ -6,7 +6,7 @@ import { TopListProps } from "@/types";
 import { ModalPage } from "@/components/parts/ModalPage";
 
 export const TopList = ({ className }: TopListProps) => {
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(true);
 
   const openCartModal = () => {
     setOpenModal(true);
@@ -40,7 +40,7 @@ export const TopList = ({ className }: TopListProps) => {
         </li>
       </ul>
 
-      <ModalPage open={openModal} setOpen={setOpenModal} />
+      <ModalPage open={openModal} setOpen={closeCartModal} />
     </div>
   );
 };
