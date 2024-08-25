@@ -1,6 +1,5 @@
 import { TMenu } from "@/types";
 import { LayoutDashboard, MenuIcon } from "lucide-react";
-import { FC } from "react";
 import { Logo } from "../../parts/Logo";
 import { Button } from "../../ui/button";
 import {
@@ -12,13 +11,13 @@ import {
   SheetTrigger,
 } from "../../ui/sheet";
 
-export const Menu: FC<TMenu> = ({
+export const Menu = ({
   children,
   title,
   className,
   classNameText,
   classNameIcon,
-}) => {
+}: TMenu) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
