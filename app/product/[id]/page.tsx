@@ -1,8 +1,11 @@
+'use client'
+
 import { fetchCategoryId, fetchCategoryItems } from '@/api'
 import { ProductSlider } from '@/components/parts'
 import { CrumbsLink } from '@/components/parts/CrumbsLink'
 import { FilterAccordion } from '@/components/parts/FilterAccordion'
 import { Section } from '@/components/sections'
+import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import { products } from '@/constants'
@@ -90,6 +93,14 @@ const product = async ({ params }: CategoryPageProps) => {
 							<Link href='/' className='text-[#4E3A9F] mt-4'>
 								Згорнути
 							</Link>
+							<div className='flex justify-between gap-4 mt-6'>
+								<Button className='px-18 py-2 bg-[#D81C1B] hover:bg-[#D81C1B]/80 flex-1'>
+									Купити
+								</Button>
+								<Button className='px-18 py-2 bg-transparent border-2 border-[#D81C1B] text-[#D81C1B] hover:bg-black/10 flex-1'>
+									Купити в 1 клік
+								</Button>
+							</div>
 						</div>
 					</FilterAccordion>
 					<FilterAccordion title='Наявність в магазинах'>
