@@ -25,7 +25,7 @@ export const ModalPage = () => {
     <div>
       <button onClick={onOpenModal} className="flex flex-col items-center">
         <ShoppingCart />
-        <span className="text-xs">Кошик</span>
+        <span className="md:block hidden text-xs">Кошик</span>
       </button>
       <Modal
         open={open}
