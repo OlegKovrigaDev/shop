@@ -164,6 +164,7 @@ interface CartItem {
 
 export type CartModalProps = {
   items: CartItem[];
-  initialTotal: number;
+  total: number;
   onClose: () => void;
+  onRemoveItem: (itemId: number) => void;
 };

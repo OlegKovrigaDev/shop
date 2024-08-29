@@ -176,14 +176,14 @@ export const cartItems = [
     id: 1,
     name: "Product 1",
     price: 100,
-    quantity: 2,
-    imageUrl: "/Categories/Cat2.jpg",
+    quantity: 1,
+    imageUrl: "/slide2-min.jpg",
   },
   {
     id: 2,
     name: "Product 2",
     price: 200,
     quantity: 1,
-    imageUrl: "/Categories/Cat1.jpg",
+    imageUrl: "/slide2-min.jpg",
   },
 ];

@@ -27,18 +27,18 @@ export const Counter = ({ initialCount, price, onChange }: CounterProps) => {
   };
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center space-x-2">
       <Button
         variant="ghost"
-        className="px-2 py-1 text-gray-500 border border-gray-300 rounded"
+        className="w-8 h-8 flex items-center justify-center text-lg text-gray-700 border border-gray-300 rounded"
         onClick={decrement}
       >
         -
       </Button>
-      <span className="mx-2">{count}</span>
+      <span className="mx-2 text-lg">{count}</span>
       <Button
         variant="ghost"
-        className="px-2 py-1 text-gray-500 border border-gray-300 rounded"
+        className="w-8 h-8 flex items-center justify-center text-lg text-gray-700 border border-gray-300 rounded"
         onClick={increment}
       >
         +
