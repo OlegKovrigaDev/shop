@@ -116,11 +116,41 @@ export type MenuProps = {
   openSidebar?: () => void;
 };
 
+export type ProductParams = {
+  Country: string;
+  Articul: string;
+  RetailPrice: string;
+  RetailPriceWithDiscount: string;
+  Категорія: string;
+  "Кількість на складі": string;
+  "Відображення на сайті": string;
+  FashionName: string;
+  Уцінка: string;
+  "Одиниця виміру": string;
+  Знижка: string;
+  "Приналежність до категорії": string;
+  "Одиниця виміру терміну гарантії": string;
+  "Розділ синхронізації повністю": string;
+  "Габарит.розміри.Висота(см)(сайт)": string;
+  "Габарит.розміри.Довжина(см)(сайт)": string;
+  "Габарит.розміри.Ширина(см)(сайт)": string;
+  "Роз.спал.місц.ширина(см)(сайт)": string;
+  "Розм.спал.місц.Довжина(см)(сайт)": string;
+};
+
 export type Product = {
-  id: number;
+  _id: string;
+  offerId: string;
+  available: boolean;
+  categoryId: string;
+  createdAt: string;
+  currencyId: string;
+  params: ProductParams;
+  type: string;
+  updatedAt: string;
   name: string;
-  price: number;
   description: string;
+  price: number;
   imageUrl: string;
 };
 
