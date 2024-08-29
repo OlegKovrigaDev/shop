@@ -27,7 +27,17 @@ export const ModalPage = () => {
         <ShoppingCart />
         <span className="md:block hidden text-xs">Кошик</span>
       </button>
-      <Modal open={open} onClose={onCloseModal} animationDuration={0} center>
+      <Modal
+        open={open}
+        onClose={onCloseModal}
+        animationDuration={0}
+        center
+        closeOnEsc
+        classNames={{
+          overlay: "customOverlay",
+          modal: "customModal",
+        }}
+      >
         <CartModal
           items={items}
           total={total}
