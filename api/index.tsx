@@ -1,7 +1,6 @@
 import axiosClient from "./axios";
-import { TItem, TItems, TCategory } from "@/types";
+import { TItem, TItems, TCategory, Product } from "@/types";
 
-// category
 export const fetchCategories = async (): Promise<TItem[]> => {
   try {
     const response = await axiosClient.get<TItem[]>("/Category");
@@ -10,8 +9,6 @@ export const fetchCategories = async (): Promise<TItem[]> => {
     throw new Error("Failed to fetch categories.");
   }
 };
-
-//CategoryItems
 
 export const fetchCategoryItems = async (
   categoryId: string
@@ -32,5 +29,15 @@ export const fetchCategoryId = async (id: string): Promise<TCategory> => {
     return response.data;
   } catch (error) {
     throw new Error(`Failed to fetch category with id ${id}.`);
+  }
+};
+
+export const getProductById = async (productId: number): Promise<Product> => {
+  try {
+    const response = await axiosClient.get<Product>(`/product/${productId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    throw new Error("Failed to fetch product.");
   }
 };

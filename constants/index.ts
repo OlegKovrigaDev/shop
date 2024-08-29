@@ -171,3 +171,19 @@ export const heroData = [
   { id: 10, text: "Комоди й тумби" },
 ];
 
+export const cartItems = [
+  {
+    id: 1,
+    name: "Product 1",
+    price: 100,
+    quantity: 2,
+    imageUrl: "/Categories/Cat2.jpg",
+  },
+  {
+    id: 2,
+    name: "Product 2",
+    price: 200,
+    quantity: 1,
+    imageUrl: "/Categories/Cat1.jpg",
+  },
+];

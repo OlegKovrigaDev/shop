@@ -1,7 +1,6 @@
-import React from "react";
 import { CrumbsLink } from "../../components/parts/CrumbsLink";
 
-const DeliveryPaymentPage: React.FC = () => {
+const DeliveryPaymentPage = () => {
   const crumbsData = {
     categories: {
       id: null,
@@ -22,8 +21,11 @@ const DeliveryPaymentPage: React.FC = () => {
         <div>
           <div className="space-y-4 text-gray-800">
             <p>
-              <span className="font-semibold">Доставка та збирання Меблів,</span> придбаних в наших офлайн магазинах відбувається по домовленості
-              з персоналом магазину, під час якого обговорюються такі моменти:
+              <span className="font-semibold">
+                Доставка та збирання Меблів,
+              </span>{" "}
+              придбаних в наших офлайн магазинах відбувається по домовленості з
+              персоналом магазину, під час якого обговорюються такі моменти:
             </p>
             <ul className="list-disc list-inside space-y-2">
               <li>адреса доставки товару;</li>
@@ -42,7 +44,8 @@ const DeliveryPaymentPage: React.FC = () => {
             <p>
               <span className="font-semibold">
                 Доставка та збирання Меблів,
-              </span> варіантах:
+              </span>{" "}
+              варіантах:
             </p>
             <ul className="list-disc list-inside space-y-2">
               <li>
