@@ -1,5 +1,3 @@
-'use client'
-
 import { fetchCategoryId, fetchCategoryItems } from '@/api'
 import { ProductSlider } from '@/components/parts'
 import { CrumbsLink } from '@/components/parts/CrumbsLink'
