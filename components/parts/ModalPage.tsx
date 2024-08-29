@@ -3,36 +3,13 @@ import { Modal } from "react-responsive-modal";
 import { ShoppingCart } from "lucide-react";
 import "react-responsive-modal/styles.css";
 import { CartModal } from "./CartModal";
-
-interface CartItem {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  imageUrl: string;
-}
+import { cartItems } from "@/constants";
 
 export const ModalPage = () => {
   const [open, setOpen] = useState(false);
+  const [items, setItems] = useState(cartItems);
 
-  const cartItems: CartItem[] = [
-    {
-      id: 1,
-      name: "Product 1",
-      price: 100,
-      quantity: 2,
-      imageUrl: "/path/to/image1.jpg",
-    },
-    {
-      id: 2,
-      name: "Product 2",
-      price: 200,
-      quantity: 1,
-      imageUrl: "/path/to/image2.jpg",
-    },
-  ];
-
-  const total = cartItems.reduce(
+  const total = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
@@ -40,14 +17,32 @@ export const ModalPage = () => {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
 
+  const handleRemoveItem = (itemId: number) => {
+    setItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+  };
+
   return (
     <div>
       <button onClick={onOpenModal} className="flex flex-col items-center">
         <ShoppingCart />
         <span className="text-xs">Кошик</span>
       </button>
-      <Modal open={open} onClose={onCloseModal} center>
-        <CartModal items={cartItems} total={total} />
+      <Modal
+        open={open}
+        onClose={onCloseModal}
+        animationDuration={0}
+        center
+        classNames={{
+          overlay: "customOverlay",
+          modal: "customModal",
+        }}
+      >
+        <CartModal
+          items={items}
+          total={total}
+          onClose={onCloseModal}
+          onRemoveItem={handleRemoveItem}
+        />
       </Modal>
     </div>
   );

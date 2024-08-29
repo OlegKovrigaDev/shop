@@ -115,3 +115,25 @@ export type MenuProps = {
   children: ReactNode;
   openSidebar?: () => void;
 };
+
+export type Product = {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+  imageUrl: string;
+};
+
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  imageUrl: string;
+}
+
+export type CartModalProps = {
+  items: CartItem[];
+  initialTotal: number;
+  onClose: () => void;
+};
