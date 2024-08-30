@@ -10,6 +10,7 @@ export type TProductCard = {
   hit?: boolean;
   discont?: boolean;
   newProduct?: boolean;
+  Articul: string;
 };
 
 export type TProductSlider = {
@@ -31,19 +32,13 @@ export type TLayout = {
 };
 
 export type TItems = {
-  name: string;
-  id: number;
+  _id: number;
   offerId: string;
-  type: string;
   available: boolean;
+  categoryId: string;
+  createdAt: string;
   currencyId: string;
-  categoryId: number;
-  params: {
-    GoodName: string;
-    RetailPrice: string;
-    RetailPriceWithDiscount: string;
-    [other: string]: string;
-  };
+  params: ProductParams;
 };
 
 export type TItem = {

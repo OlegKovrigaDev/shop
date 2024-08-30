@@ -9,9 +9,6 @@ export default function Home() {
       <Section title="Нові товари">
         <ProductSlider arr={products}></ProductSlider>
       </Section>
-      <Section title="ХІТ продажу">
-        <ProductSlider arr={products}></ProductSlider>
-      </Section>
       <Section title="Етапи покупки">
         <Ethaps />
       </Section>

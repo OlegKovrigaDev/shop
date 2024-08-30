@@ -32,12 +32,45 @@ export const fetchCategoryId = async (id: string): Promise<TCategory> => {
   }
 };
 
-export const getProductById = async (productId: number): Promise<Product> => {
+export const getProduct = async (_id: string): Promise<Product> => {
   try {
-    const response = await axiosClient.get<Product>(`/product/${productId}`);
+    const response = await axiosClient.get<Product>(`/product?page=1&limit=1`);
     return response.data;
   } catch (error) {
     console.error("Error fetching product:", error);
     throw new Error("Failed to fetch product.");
+  }
+};
+
+export const getProductById = async (offerId: string): Promise<Product> => {
+  try {
+    const response = await axiosClient.get<Product>(`/product/${offerId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    throw new Error("Failed to fetch product.");  
+  }
+};
+
+export const getRandomProduct = async (): Promise<Product> => {
+  try {
+    const page = 1;
+    const limit = 10;
+
+    const response = await axiosClient.get<{ products: Product[] }>(
+      `/product?page=${page}&limit=${limit}`
+    );
+
+    if (response.data.products.length === 0) {
+      throw new Error("No products found.");
+    }
+
+    const randomIndex = Math.floor(
+      Math.random() * response.data.products.length
+    );
+    return response.data.products[randomIndex];
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    throw new Error("Failed to fetch products.");
   }
 };
