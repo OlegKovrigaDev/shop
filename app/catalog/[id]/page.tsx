@@ -78,6 +78,7 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
                 oldPrice={RetailPriceWithDiscount}
                 newPrice={RetailPrice}
                 Articul={Articul}
+                offerId={offerId}
               />
             )
           )}

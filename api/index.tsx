@@ -32,20 +32,12 @@ export const fetchCategoryId = async (id: string): Promise<TCategory> => {
   }
 };
 
-export const getProduct = async (_id: string): Promise<Product> => {
-  try {
-    const response = await axiosClient.get<Product>(`/product?page=1&limit=1`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching product:", error);
-    throw new Error("Failed to fetch product.");
-  }
-};
+
 
 export const getProductById = async (offerId: string): Promise<Product> => {
   try {
-    const response = await axiosClient.get<Product>(`/product/${offerId}`);
-    return response.data;
+    const product = await axiosClient.get<Product>(`/product/${offerId}`);
+    return product.data;
   } catch (error) {
     console.error("Error fetching product:", error);
     throw new Error("Failed to fetch product.");  
@@ -74,3 +66,4 @@ export const getRandomProduct = async (): Promise<Product> => {
     throw new Error("Failed to fetch products.");
   }
 };
+

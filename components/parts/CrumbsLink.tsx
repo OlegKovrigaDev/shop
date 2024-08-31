@@ -31,13 +31,13 @@ export const CrumbsLink: React.FC<TCrumbs> = ({ categories, items }) => {
           </BreadcrumbPage>
           {/* <BreadcrumbSeparator /> */}
         </BreadcrumbItem>
-        {/* <BreadcrumbItem>
+        <BreadcrumbItem>
           <BreadcrumbLink asChild>
             <Link href={`/Category/${categories.id}`}>
-              {items[1].params.GoodName}
+              {items[1].params.FashionName}
             </Link>
           </BreadcrumbLink>
-        </BreadcrumbItem> */}
+        </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
   );

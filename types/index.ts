@@ -11,6 +11,7 @@ export type TProductCard = {
   discont?: boolean;
   newProduct?: boolean;
   Articul: string;
+  offerId: string;
 };
 
 export type TProductSlider = {
