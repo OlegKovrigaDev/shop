@@ -14,9 +14,9 @@ type CartItem = {
 export const useCart = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  const addToCart = async (productId: number) => {
+  const addToCart = async (offerId: string) => {
     try {
-      const product = await getProductById(productId);
+      const product = await getProductById(offerId);
 
       const newCartItem: CartItem = {
         id: product._id,

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Product } from "@/types";
 import { getProductById } from "@/api";
 
-export const useProduct = (productId: number) => {
+export const useProduct = (offerId: string) => {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -10,7 +10,7 @@ export const useProduct = (productId: number) => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const data = await getProductById(productId);
+        const data = await getProductById(offerId);
         setProduct(data);
         setLoading(false);
       } catch (err) {
@@ -20,7 +20,7 @@ export const useProduct = (productId: number) => {
     };
 
     fetchProduct();
-  }, [productId]);
+  }, [offerId]);
 
   return { product, loading, error };
 };
