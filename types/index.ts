@@ -48,6 +48,7 @@ export type TItem = {
 };
 export type TCategory = {
   id: string;
+  items: TItems[];
   category: {
     name: string;
   };
@@ -55,7 +56,10 @@ export type TCategory = {
 
 export type TCrumbs = {
   categories: TCategoriesItem;
+  category: string;
+  title: string;
   items: TItems[];
+  isProductPage: boolean;
 };
 
 type TCategoriesItem = {

@@ -1,44 +1,76 @@
-'use client'
-import { TCrumbs } from '@/types'
-import Link from 'next/link'
-import React from 'react'
+import React from "react";
+import Link from "next/link";
 import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbList,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
-} from '../ui/breadcrumb'
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "../ui/breadcrumb";
+import { TCrumbs } from "@/types";
 
-export const CrumbsLink: React.FC<TCrumbs> = ({ categories, items }) => {
-	return (
-		<Breadcrumb className='py-7'>
-			<BreadcrumbList className='text-lg'>
-				<BreadcrumbItem>
-					<BreadcrumbLink asChild>
-						<Link href='/'>Головна</Link>
-					</BreadcrumbLink>
-				</BreadcrumbItem>
-				<BreadcrumbSeparator />
-				<BreadcrumbItem>
-					<BreadcrumbPage>
-						<BreadcrumbLink asChild>
-							<Link href={`/Category/${categories.id}`}>
-								{categories.category.name}
-							</Link>
-						</BreadcrumbLink>
-					</BreadcrumbPage>
-					{/* <BreadcrumbSeparator /> */}
-				</BreadcrumbItem>
-				<BreadcrumbItem>
-					<BreadcrumbLink asChild>
-						<Link href={`/Category/${categories.id}`}>
-							{items[1].params.FashionName}
-						</Link>
-					</BreadcrumbLink>
-				</BreadcrumbItem>
-			</BreadcrumbList>
-		</Breadcrumb>
-	)
-}
+const BreadcrumbHomeLink = () => (
+  <BreadcrumbItem>
+    <BreadcrumbLink asChild>
+      <Link href="/">Головна</Link>
+    </BreadcrumbLink>
+  </BreadcrumbItem>
+);
+
+const BreadcrumbCategoryLink = ({
+  categories,
+  category,
+  isProductPage,
+}: {
+  categories: TCrumbs["categories"];
+  category: string | undefined;
+  isProductPage: boolean;
+}) => (
+  <BreadcrumbItem>
+    <BreadcrumbLink asChild>
+      <Link href={`/Category/${categories?.id}`}>
+        {categories?.category.name}
+        {category && `${category}`}
+      </Link>
+    </BreadcrumbLink>
+  </BreadcrumbItem>
+);
+
+const BreadcrumbTitleLink = ({ title }: { title: string }) => (
+  <BreadcrumbPage>
+    <BreadcrumbItem>
+      <BreadcrumbLink asChild>
+        <span>{title}</span>
+      </BreadcrumbLink>
+    </BreadcrumbItem>
+  </BreadcrumbPage>
+);
+
+export const CrumbsLink = ({
+  categories,
+  items,
+  title,
+  category,
+  isProductPage,
+}: TCrumbs) => {
+  return (
+    <Breadcrumb className="py-7">
+      <BreadcrumbList className="text-lg">
+        <BreadcrumbHomeLink />
+        <BreadcrumbSeparator />
+        <BreadcrumbCategoryLink
+          categories={categories}
+          category={category}
+          isProductPage={isProductPage}
+        />
+        {isProductPage && title && (
+          <>
+            <BreadcrumbSeparator />
+            <BreadcrumbTitleLink title={title} />
+          </>
+        )}
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
+};

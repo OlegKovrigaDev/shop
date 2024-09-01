@@ -10,14 +10,17 @@ import Link from "next/link";
 
 const CategoryPage = async ({ params }: CategoryPageProps) => {
   const { id } = params;
-  let items: TItems[] = [];
 
   let categories = await fetchCategoryId(id);
-  items = await fetchCategoryItems(id);
+  let items = await fetchCategoryItems(id);
 
   return (
     <div className="mb-[75px]">
-      <CrumbsLink categories={categories} items={items} />
+      <CrumbsLink
+        categories={categories}
+        category={undefined}
+        isProductPage={false}
+      />
       <div className="flex flex-col gap-8 md:flex-row md:justify-between">
         <div className="flex flex-col gap-2 max-w-[280px] sm:min-w-[280px]">
           {[
@@ -37,17 +40,18 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
                   { id: 3, type: "Односпальні", count: 24 },
                   { id: 4, type: "Односпальні", count: 24 },
                   { id: 5, type: "Односпальні", count: 24 },
-                ].map(({ id, type, count }) => {
-                  return (
-                    <div key={id} className="flex justify-between text-[16px]">
-                      <span className="flex gap-2 items-center">
-                        <Checkbox id="variants" className="border-2 rounded" />
-                        <Label htmlFor="variants">{type}</Label>
-                      </span>
-                      <span>[{count}]</span>
-                    </div>
-                  );
-                })}
+                ].map(({ id, type, count }) => (
+                  <div key={id} className="flex justify-between text-[16px]">
+                    <span className="flex gap-2 items-center">
+                      <Checkbox
+                        id={`variant-${id}`}
+                        className="border-2 rounded"
+                      />
+                      <Label htmlFor={`variant-${id}`}>{type}</Label>
+                    </span>
+                    <span>[{count}]</span>
+                  </div>
+                ))}
 
                 <Link href="/" className="text-[#4E3A9F] mt-4">
                   Згорнути
@@ -71,15 +75,16 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
                 Articul,
               },
             }) => (
-              <ProductCard
-                key={offerId}
-                img="/slide1-min.jpg"
-                title={FashionName}
-                oldPrice={RetailPriceWithDiscount}
-                newPrice={RetailPrice}
-                Articul={Articul}
-                offerId={offerId}
-              />
+              <Link key={offerId} href={`/product/${offerId}`} passHref>
+                <ProductCard
+                  img="/slide1-min.jpg"
+                  title={FashionName}
+                  oldPrice={RetailPriceWithDiscount}
+                  newPrice={RetailPrice}
+                  Articul={Articul}
+                  offerId={offerId}
+                />
+              </Link>
             )
           )}
         </div>
