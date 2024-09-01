@@ -9,15 +9,17 @@ import { FC, PropsWithChildren } from 'react'
 interface FilterAccordionProps extends PropsWithChildren {
 	title: string
 	className?: string
+	onToggle?: () => void
 }
 
 export const FilterAccordion: FC<FilterAccordionProps> = ({
 	title,
 	className,
 	children,
+	onToggle,
 }) => {
 	return (
-		<div className='bg-white w-full p-4 rounded-[4px]'>
+		<div className='bg-white w-full p-4 rounded-[4px]' onClick={onToggle}>
 			<Accordion type='single' collapsible>
 				<AccordionItem value='item-1' className='border-transparent'>
 					<AccordionTrigger className={`bg-[#C6C6C7] px-4 py-2 ${className}`}>
