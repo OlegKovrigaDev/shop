@@ -1,3 +1,6 @@
+"use client";
+import React from "react";
+import Link from "next/link";
 import { fetchCategoryId, fetchCategoryItems } from "@/api/index";
 import { CrumbsLink } from "@/components/parts/CrumbsLink";
 import { FilterAccordion } from "@/components/parts/FilterAccordion";
@@ -5,10 +8,9 @@ import { ProductCard } from "@/components/parts/ProductCard";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { CategoryPageProps, TItems } from "@/types";
-import Link from "next/link";
+import { CategoryPageProps } from "@/types";
 
-const CategoryPage = async ({ params }: CategoryPageProps) => {
+const category = async ({ params }: CategoryPageProps) => {
   const { id } = params;
 
   let categories = await fetchCategoryId(id);
@@ -18,8 +20,10 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
     <div className="mb-[75px]">
       <CrumbsLink
         categories={categories}
-        category={undefined}
+        category={categories.category.name}
         isProductPage={false}
+        title=""
+        items={[]}
       />
       <div className="flex flex-col gap-8 md:flex-row md:justify-between">
         <div className="flex flex-col gap-2 max-w-[280px] sm:min-w-[280px]">
@@ -75,7 +79,11 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
                 Articul,
               },
             }) => (
-              <Link key={offerId} href={`/product/${offerId}`} passHref>
+              <Link
+                key={offerId}
+                href={`/product/${offerId}?categoryId=${id}`}
+                passHref
+              >
                 <ProductCard
                   img="/slide1-min.jpg"
                   title={FashionName}
@@ -93,4 +101,4 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
   );
 };
 
-export default CategoryPage;
+export default category;

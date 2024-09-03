@@ -28,11 +28,11 @@ export default function RootLayout({
           `flex flex-col min-h-screen font-sans antialiased bg-[#f8f8f8] ${fontSans.variable} relative`
         )}
       >
-        <CategoryProvider>
-          <CartProvider>
+        {/* <CartProvider> */}
+          <CategoryProvider>
             <Layout>{children}</Layout>
-          </CartProvider>
-        </CategoryProvider>
+          </CategoryProvider>
+        {/* </CartProvider> */}
       </body>
     </html>
   );

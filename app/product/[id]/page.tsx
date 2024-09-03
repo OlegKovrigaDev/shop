@@ -1,17 +1,22 @@
+"use client";
+import React from "react";
+import Link from "next/link";
 import { getProductById } from "@/api";
-import { ProductSlider } from "@/components/parts";
 import { CrumbsLink } from "@/components/parts/CrumbsLink";
 import { FilterAccordion } from "@/components/parts/FilterAccordion";
 import { Section } from "@/components/sections";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import Link from "next/link";
 import { CategoryPageProps } from "@/types";
 import { Check } from "lucide-react";
 
-const ProductPage = async ({ params }: CategoryPageProps) => {
+const product = async ({
+  params,
+  searchParams,
+}: CategoryPageProps & { searchParams: { categoryId: string } }) => {
   const { id } = params;
+  const categoryId = searchParams.categoryId;
 
   try {
     const productId = await getProductById(id);
@@ -22,6 +27,11 @@ const ProductPage = async ({ params }: CategoryPageProps) => {
           isProductPage={true}
           category={productId.params["Приналежність до категорії"]}
           title={productId.params.FashionName}
+          items={[]}
+          categories={{
+            id: categoryId,
+            category: { name: productId.params["Приналежність до категорії"] },
+          }}
         />
         <div className="flex justify-between">
           <div className="w-[800px] flex flex-col gap-6">
@@ -102,25 +112,13 @@ const ProductPage = async ({ params }: CategoryPageProps) => {
                 </Link>
               </div>
             </FilterAccordion>
-            <FilterAccordion title="Гарантія та повернення">
-              <div className="flex flex-col gap-2 text-xs">
-                <p>Warranty and return conditions...</p>
-                <Link href="/" className="text-[#4E3A9F]">
-                  Дізнатися всі умови
-                </Link>
-              </div>
-            </FilterAccordion>
           </div>
         </div>
-        <Section title="Переглянуті товари" className="mb-[75px]">
-          <ProductSlider arr={[]} />
-        </Section>
       </>
     );
   } catch (error) {
-    console.error("Error fetching product data", error);
-    return <div>Error loading product data</div>;
+    return <div>Error loading product.</div>;
   }
 };
 
-export default ProductPage;
+export default product;
