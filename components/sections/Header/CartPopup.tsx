@@ -1,8 +1,7 @@
 import { TCartPopup } from '@/types'
 import Link from 'next/link'
-import { FC } from 'react'
 
-export const CartPopup: FC<TCartPopup> = ({ text }) => {
+export const CartPopup = ({ text }:TCartPopup) => {
 	return (
 		<div>
 			<h3>{text}</h3>
