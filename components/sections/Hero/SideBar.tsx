@@ -50,14 +50,14 @@ export const SideBar = ({ openSidebar }: SideBarProps) => {
           <Menu
             title="Всі категорії &gt;"
             classNameText="md:text-[15px]"
-            className="flex-row justify-start hover:text-red-500 md:w-full md:h-6"
+            className="flex-row justify-start hover:text-red-500 w-full md:h-6"
             classNameIcon="md:hidden"
           >
-            <div className="overflow-y-auto max-h-screen p-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
+            <div className="overflow-y-auto max-h-screen p-4 scrollbar-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
                 {fetchedItems.map(({ id, name }) => (
                   <Link href={`/category/${id}`} key={id}>
-                    <p className="text-sm font-medium p-2 bg-gray-100 rounded-md hover:bg-gray-200 transition">
+                    <p className="text-sm font-medium p-3 bg-gray-100 rounded-md hover:bg-gray-200 transition">
                       {name}
                     </p>
                   </Link>
