@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Modal } from "react-responsive-modal";
 import { ShoppingCart } from "lucide-react";
-import "react-responsive-modal/styles.css";
-import { CartModal } from "./CartModal";
+import Modal from "./Modal";
 import { cartItems } from "@/constants";
+import { CartModal } from "./CartModal";
 
 export const ModalPage = () => {
   const [open, setOpen] = useState(false);
@@ -27,17 +26,7 @@ export const ModalPage = () => {
         <ShoppingCart />
         <span className="md:block hidden text-xs">Кошик</span>
       </button>
-      <Modal
-        open={open}
-        onClose={onCloseModal}
-        animationDuration={0}
-        center
-        closeOnEsc
-        classNames={{
-          overlay: "customOverlay",
-          modal: "customModal",
-        }}
-      >
+      <Modal show={open} onClose={onCloseModal}>
         <CartModal
           items={items}
           total={total}

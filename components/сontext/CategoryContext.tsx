@@ -2,8 +2,8 @@
 import React, { createContext, useContext, useState } from "react";
 
 interface CategoryContextProps {
-  categoryId: string | null;
-  setCategoryId: (id: string | null) => void;
+  productId: string | null;
+  setProductId: (id: string | null) => void;
 }
 
 const CategoryContext = createContext<CategoryContextProps | undefined>(
@@ -13,10 +13,10 @@ const CategoryContext = createContext<CategoryContextProps | undefined>(
 export const CategoryProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [categoryId, setCategoryId] = useState<string | null>(null);
+  const [productId, setProductId] = useState<string | null>(null);
 
   return (
-    <CategoryContext.Provider value={{ categoryId, setCategoryId }}>
+    <CategoryContext.Provider value={{ productId, setProductId }}>
       {children}
     </CategoryContext.Provider>
   );

@@ -4,14 +4,14 @@ import { ReactNode } from "react";
 export type TProductCard = {
   id?: string;
   img?: string;
-  title: string;
+  title?: string;
   oldPrice?: string;
   newPrice?: string;
   hit?: boolean;
   discont?: boolean;
   newProduct?: boolean;
-  Articul: string;
-  offerId: string;
+  Articul?: string;
+  offerId?: string;
 };
 
 export type TProductSlider = {
@@ -48,15 +48,16 @@ export type TItem = {
 };
 export type TCategory = {
   id: string;
-  items: TItems[];
+  items?: TItems[];
   category: {
     name: string;
   };
 };
 
 export type TCrumbs = {
-  categories: TCategoriesItem;
+  categories?: TCategoriesItem;
   category: string;
+
   title: string;
   items: TItems[];
   isProductPage: boolean;

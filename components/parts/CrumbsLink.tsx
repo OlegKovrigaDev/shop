@@ -29,9 +29,8 @@ const BreadcrumbCategoryLink = ({
 }) => (
   <BreadcrumbItem>
     <BreadcrumbLink asChild>
-      <Link href={`/Category/${categories?.id}`}>
+      <Link href={`/category/${categories?.id}`}>
         {categories?.category.name}
-        {category && `${category}`}
       </Link>
     </BreadcrumbLink>
   </BreadcrumbItem>
