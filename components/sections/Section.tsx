@@ -1,8 +1,7 @@
 import { TSection } from '@/types'
-import { FC } from 'react'
 import { Title } from '../parts/Title'
 
-export const Section: FC<TSection> = ({ title, children, className }) => (
+export const Section = ({ title, children, className }:TSection) => (
 	<section className={`mt-[56px] md:mt-[72px]  ${className}`}>
 		<Title>{title}</Title>
 		{children}

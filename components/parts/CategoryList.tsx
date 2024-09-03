@@ -41,7 +41,7 @@ const CategoryList = ({ limit }: CategoryListProps) => {
     <ul className="space-y-2">
       {fetchedItems.slice(0, limit).map(({ id, name }) => (
         <li key={id}>
-          <Link href={`/catalog/${id}`}>
+          <Link href={`/category/${id}`}>
             <a className="text-blue-600 hover:underline">{name}</a>
           </Link>
         </li>
