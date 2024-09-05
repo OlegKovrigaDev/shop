@@ -2,32 +2,17 @@
 import Link from "next/link";
 import { useCategories } from "../../../hooks/useCategories";
 import { Skeleton } from "../../ui/skeleton";
-import { Menu } from "../Header/Menu";
 
-type SideBarProps = {
-  openSidebar?: boolean;
-};
-
-export const SideBar = ({ openSidebar }: SideBarProps) => {
+export const SideBar = () => {
   const { fetchedItems, loading, error } = useCategories();
-
-  const getSkeletonWidth = (textLength: number) => {
-    const avgCharWidth = 16;
-    return Math.max(80, textLength * avgCharWidth);
-  };
 
   if (loading) {
     return (
-      <ul className="w-full max-w-72 max-h-[432px] overflow-y-scroll font-medium flex-col gap-4 hidden lg:flex">
+      <ul className="w-full max-w-full max-h-[80vh] font-medium flex-col gap-4">
         {Array.from({ length: 10 }).map((_, index) => (
-          <li key={index}>
-            <Skeleton
-              className="h-[24px]"
-              style={{
-                width: `${getSkeletonWidth(10)}px`,
-                background: "#e2e8f0",
-              }}
-            />
+          <li key={index} className="flex items-center gap-2 p-2">
+            <Skeleton className="h-6 w-6" />
+            <Skeleton className="h-6 w-full" />
           </li>
         ))}
       </ul>
@@ -35,39 +20,44 @@ export const SideBar = ({ openSidebar }: SideBarProps) => {
   }
 
   if (error) {
-    return <p className="min-w-72 lg:block hidden">Помилка: {error}</p>;
+    return <p className="min-w-72">Ошибка: {error}</p>;
   }
 
+  const handleClick = () => {
+    const element = document.querySelector("[data-open-sidebar]");
+    if (element) {
+      (element as HTMLElement).click();
+    }
+  };
+
   return (
-    <ul className="w-full max-w-72 font-medium flex-col gap-4 hidden lg:flex">
-      {fetchedItems.slice(0, 10).map(({ id, name }) => (
-        <li key={id}>
-          <Link href={`/category/${id}`}>{name}</Link>
-        </li>
-      ))}
-      <li>
-        {openSidebar && (
-          <Menu
-            title="Всі категорії &gt;"
-            classNameText="md:text-[15px]"
-            className="flex-row justify-start hover:text-red-500 md:w-full md:h-6"
-            classNameIcon="md:hidden"
+    <div className="w-full max-w-full max-h-[80vh] p-4">
+      <ul className="flex flex-col gap-4">
+        {fetchedItems.slice(0, 7).map(({ id, name }) => (
+          <li
+            key={id}
+            className="flex items-center gap-2 p-2 bg-white rounded-md shadow hover:bg-gray-100 transition"
           >
-            <div className="overflow-y-auto max-h-screen p-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
-                {fetchedItems.map(({ id, name }) => (
-                  <Link href={`/category/${id}`} key={id}>
-                    <p className="text-sm font-medium p-2 bg-gray-100 rounded-md hover:bg-gray-200 transition">
-                      {name}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-            <SideBar />
-          </Menu>
-        )}
-      </li>
-    </ul>
+            {/* Icon */}
+            <div className="h-6 w-6 bg-gray-300 rounded-full"></div>
+            <Link href={`/category/${id}`}>
+              <p className="text-base font-medium">{name}</p>
+            </Link>
+          </li>
+        ))}
+        <li>
+          <Link
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick();
+            }}
+            className="text-red-500 font-medium"
+          >
+            Всі Категорії &gt;
+          </Link>
+        </li>
+      </ul>
+    </div>
   );
 };

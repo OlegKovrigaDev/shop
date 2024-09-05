@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { Logo } from "../../parts/Logo";
-import { SideBar } from "../Hero/SideBar";
 import { Menu } from "./Menu";
 import { SearchBar } from "./SearchBar";
 import { SelectLang } from "./SelectLang";
@@ -29,9 +28,7 @@ export const Header = () => {
           {!isSearchVisible && (
             <>
               <TopList />
-              <Menu title='Каталог'>
-                <SideBar />
-              </Menu>
+              <Menu title="Каталог" />
             </>
           )}
         </div>
@@ -45,9 +42,7 @@ export const Header = () => {
             { value: "ru", text: "RU" },
           ]}
         />
-        <Menu title="Каталог">
-          <SideBar />
-        </Menu>
+        <Menu title="Каталог" />
         <SearchBar onSearchToggle={() => {}} />
         <TopList />
       </div>

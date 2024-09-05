@@ -9,6 +9,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@headlessui/react": "^2.1.5",
 		"@radix-ui/react-accordion": "^1.2.0",
 		"@radix-ui/react-checkbox": "^1.1.1",
 		"@radix-ui/react-dialog": "^1.1.1",
@@ -28,6 +29,7 @@
 		"react-responsive-modal": "^6.4.2",
 		"sass": "^1.77.8",
 		"tailwind-merge": "^2.5.2",
+		"tailwind-scrollbar": "^3.1.0",
 		"tailwindcss-animate": "^1.0.7"
 	},
 	"devDependencies": {

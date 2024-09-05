@@ -42,7 +42,7 @@ const CategoryList = ({ limit }: CategoryListProps) => {
       {fetchedItems.slice(0, limit).map(({ id, name }) => (
         <li key={id}>
           <Link href={`/category/${id}`}>
-            <a className="text-blue-600 hover:underline">{name}</a>
+            <p className="text-blue-600 hover:underline">{name}</p>
           </Link>
         </li>
       ))}

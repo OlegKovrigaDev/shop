@@ -86,7 +86,7 @@ export type THoverMenu = {
 };
 
 export type TMenu = {
-  children: ReactNode;
+  children?: ReactNode;
   title?: string;
   className?: string;
   classNameText?: string;
