@@ -41,13 +41,7 @@ export default function Modal({ show, children, onClose }: ModalProps) {
           leaveFrom="opacity-100 scale-100"
           leaveTo="opacity-0 scale-95"
         >
-          <Dialog.Panel className="relative bg-white rounded-lg shadow-xl transform transition-all p-7 mx-auto sm:my-10 sm:w-full sm:max-w-2xl">
-            <button
-              className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 focus:outline-none"
-              onClick={onClose}
-            >
-              <span className="sr-only">Close</span>✕
-            </button>
+          <Dialog.Panel className="relative bg-white rounded-lg shadow-xl transform transition-all mx-auto w-full h-full sm:my-10 sm:w-full sm:max-w-2xl sm:h-auto sm:p-28">
             {children}
           </Dialog.Panel>
         </Transition.Child>

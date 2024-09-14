@@ -61,8 +61,8 @@ export const CartModal = ({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-      <div className="relative bg-white rounded-lg shadow-lg max-w-full md:max-w-2xl w-full sm:p-6 md:p-8 mx-auto">
-        <div className="flex justify-between items-center mb-6">
+      <div className="relative bg-white rounded-lg shadow-lg max-w-full w-full h-full sm:max-w-2xl sm:h-auto sm:mx-auto">
+        <div className="flex justify-between items-center mb-6 p-4 border-b">
           <h2 className="text-lg font-semibold">Кошик</h2>
           <button
             onClick={onClose}
@@ -72,19 +72,19 @@ export const CartModal = ({
           </button>
         </div>
 
-        <div className="space-y-4 overflow-y-auto max-h-[50vh] md:max-h-[60vh]">
+        <div className="space-y-4 overflow-y-auto max-h-[60vh] sm:max-h-[70vh] p-4">
           {items.length > 0 ? (
             items.map((item) => (
               <div
                 key={item.id}
                 className="flex items-center justify-between bg-white p-4 rounded-md border border-gray-200"
               >
-                <div className="flex items-center">
+                <div className="flex-shrink-0">
                   <Image
                     src={item.imageUrl}
                     alt={item.name}
-                    width={159}
-                    height={136}
+                    width={100}
+                    height={100}
                     className="object-cover rounded-md"
                   />
                 </div>
@@ -116,7 +116,7 @@ export const CartModal = ({
           )}
         </div>
 
-        <div className="mt-6 border-t pt-6">
+        <div className="mt-6 border-t pt-4 p-4">
           <div className="flex justify-between items-center mb-4">
             <p className="text-lg font-semibold">Всього: {currentTotal} грн.</p>
           </div>
@@ -140,7 +140,7 @@ export const CartModal = ({
           <h3 className="text-sm font-medium mb-3">
             Швидке оформлення замовлення
           </h3>
-          <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+          <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
             <Input
               type="text"
               placeholder="Ім'я"
