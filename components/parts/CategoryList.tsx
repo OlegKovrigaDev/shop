@@ -1,53 +1,37 @@
-// components/CategoryList.tsx
-import { useCategories } from "@/hooks/useCategories";
-import Link from "next/link";
-import { Skeleton } from "../ui/skeleton";
+import { FC } from "react";
+import { TCategory } from "@/types";
 
 interface CategoryListProps {
-  limit: number;
+  categories: TCategory[];
+  openCategories: string[];
+  toggleCategory: (categoryId: string) => void;
+  parentId: string | null;
 }
 
-const CategoryList = ({ limit }: CategoryListProps) => {
-  const { fetchedItems, loading, error } = useCategories();
-
-  const getSkeletonWidth = (textLength: number) => {
-    const avgCharWidth = 16;
-    return Math.max(80, textLength * avgCharWidth);
+export const CategoryList: FC<CategoryListProps> = ({
+  categories,
+  openCategories,
+  toggleCategory,
+  parentId,
+}) => {
+  const renderCategories = (parentId: string | null) => {
+    return categories
+      .filter((category) => category.parentId === parentId)
+      .map((category) => (
+        <li key={category.id} className="flex flex-col">
+          <div
+            onClick={() => toggleCategory(category.id)}
+            className="flex items-center gap-2 p-2 bg-white rounded-md shadow hover:bg-gray-100 transition cursor-pointer"
+          >
+            <div className="h-6 w-6 bg-gray-300 rounded-full"></div>
+            <p className="text-base font-medium">{category.name}</p>
+          </div>
+          {openCategories.includes(category.id) && (
+            <ul className="ml-4">{renderCategories(category.id)}</ul>
+          )}
+        </li>
+      ));
   };
 
-  if (loading) {
-    return (
-      <ul className="space-y-2">
-        {Array.from({ length: limit }).map((_, index) => (
-          <li key={index}>
-            <Skeleton
-              className="h-6"
-              style={{
-                width: `${getSkeletonWidth(10)}px`,
-                background: "#e2e8f0",
-              }}
-            />
-          </li>
-        ))}
-      </ul>
-    );
-  }
-
-  if (error) {
-    return <p className="text-red-500">Ошибка: {error}</p>;
-  }
-
-  return (
-    <ul className="space-y-2">
-      {fetchedItems.slice(0, limit).map(({ id, name }) => (
-        <li key={id}>
-          <Link href={`/category/${id}`}>
-            <p className="text-blue-600 hover:underline">{name}</p>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
+  return <ul>{renderCategories(parentId)}</ul>;
 };
-
-export default CategoryList;

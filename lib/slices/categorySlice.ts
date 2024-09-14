@@ -41,7 +41,7 @@ const categorySlice = createSlice({
       )
       .addCase(fetchCategories.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Не удалось получить категории";
+        state.error = action.error.message ?? "Error fetching product";
       });
   },
 });

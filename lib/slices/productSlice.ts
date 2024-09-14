@@ -1,23 +1,24 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axiosClient from "@/api/axios";
-import { TItem } from "@/types";
+import axios from "@/api/axios";
+import { TProduct } from "@/types";
 
 interface ProductState {
-  currentProduct: TItem | null;
+  product: TProduct | null;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: ProductState = {
-  currentProduct: null,
+  product: null,
   loading: false,
   error: null,
 };
 
-export const fetchProductById = createAsyncThunk<TItem, string>(
-  "product/fetchProductById",
+// Fetch product by offerId
+export const fetchProductByOfferId = createAsyncThunk<TProduct, string>(
+  "product/fetchProductByOfferId",
   async (offerId) => {
-    const response = await axiosClient.get<TItem>(`/product/${offerId}`);
+    const response = await axios.get<TProduct>(`/product/${offerId}`);
     return response.data;
   }
 );
@@ -27,12 +28,22 @@ const productSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(
-      fetchProductById.fulfilled,
-      (state, action: PayloadAction<TItem>) => {
-        state.currentProduct = action.payload;
-      }
-    );
+    builder
+      .addCase(fetchProductByOfferId.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        fetchProductByOfferId.fulfilled,
+        (state, action: PayloadAction<TProduct>) => {
+          state.product = action.payload;
+          state.loading = false;
+        }
+      )
+      .addCase(fetchProductByOfferId.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message ?? "Error fetching product";
+      });
   },
 });
 

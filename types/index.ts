@@ -55,6 +55,8 @@ export type TItem = TCategoriesItem & {
 export type TCategory = {
   id: string;
   items?: TItems[];
+  name: string;
+  parentId: string;
   category: {
     name: string;
   };
@@ -124,14 +126,12 @@ export type MenuProps = {
 };
 
 export type ProductParams = {
-  Country: string;
   Articul: string;
   RetailPrice: string;
   RetailPriceWithDiscount: string;
-  Категорія: string;
-  "Кількість на складі": string;
   "Відображення на сайті": string;
-  FashionName: string;
+  ModelName: string;
+  GoodNameUA: string;
   Уцінка: string;
   "Одиниця виміру": string;
   Знижка: string;
@@ -141,23 +141,27 @@ export type ProductParams = {
   "Габарит.розміри.Висота(см)(сайт)": string;
   "Габарит.розміри.Довжина(см)(сайт)": string;
   "Габарит.розміри.Ширина(см)(сайт)": string;
+  "Додатково ліжка(сайт ліжка)": string;
+  "Матеріал ліжка(сайт ліжка)": string;
+  "Ніша для білизни(сайт ліжка)": string;
+  "Основа під матрац(сайт ліжка)": string;
+  "Підйомний механізм(сайт ліжка)": string;
   "Роз.спал.місц.ширина(см)(сайт)": string;
   "Розм.спал.місц.Довжина(см)(сайт)": string;
+  "Тип ліжка(сайт ліжка)": string;
+  "Опис текст(сайт)": string;
 };
 
 export type Product = {
   _id: string;
   offerId: string;
-  available: boolean;
-  categoryId: string;
-  createdAt: string;
-  currencyId: string;
-  params: ProductParams;
   type: string;
+  available: boolean;
+  currencyId: string;
+  categoryId: string;
+  params: ProductParams;
+  createdAt: string;
   updatedAt: string;
-  name: string;
-  description: string;
-  price: number;
   imageUrl: string;
 };
 
@@ -176,7 +180,7 @@ export type CartModalProps = {
   onRemoveItem: (itemId: number) => void;
 };
 
-type TProduct = {
+export type TProduct = {
   offerId: string;
   params: {
     FashionName: string;

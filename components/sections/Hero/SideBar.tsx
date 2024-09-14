@@ -1,15 +1,25 @@
 "use client";
 import Link from "next/link";
 import { Skeleton } from "../../ui/skeleton";
-import { useCategoriesKatalog } from "@/hooks/useCategoryKatalog";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useActions } from "@/hooks/useActions";
+import { RootState } from "@/lib/store";
 
 export const SideBar = () => {
-  const { fetchedItems, loading, error } = useCategoriesKatalog();
+  const { fetchCategories } = useActions();
+  const { categories, loading, error } = useSelector(
+    (state: RootState) => state.categories
+  );
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
 
   if (loading) {
     return (
       <ul className="w-full max-w-full max-h-[80vh] font-medium flex-col gap-4">
-        {Array.from({ length: 10 }).map((_, index) => (
+        {Array.from({ length: 8 }).map((_, index) => (
           <li key={index} className="flex items-center gap-2 p-2">
             <Skeleton className="h-6 w-6" />
             <Skeleton className="h-6 w-full" />
@@ -23,6 +33,23 @@ export const SideBar = () => {
     return <p className="min-w-72">Ошибка: {error}</p>;
   }
 
+  const renderMainCategories = () => {
+    return categories
+      .filter((category) => category.parentId === null)
+      .slice(0, 10)
+      .map((category) => (
+        <li key={category.id} className="flex flex-col">
+          <div className="flex items-center gap-2 p-2 bg-white rounded-md shadow hover:bg-gray-100 transition">
+            {/* Icon */}
+            <div className="h-6 w-6 bg-gray-300 rounded-full"></div>
+            <Link href={`/category/${category.id}?showAll=true`}>
+              <p className="text-base font-medium">{category.name}</p>
+            </Link>
+          </div>
+        </li>
+      ));
+  };
+
   const handleClick = () => {
     const element = document.querySelector("[data-open-sidebar]");
     if (element) {
@@ -31,20 +58,9 @@ export const SideBar = () => {
   };
 
   return (
-    <div className="w-full max-w-full max-h-[80vh] p-4">
-      <ul className="flex flex-col gap-4">
-        {fetchedItems.slice(0, 7).map(({ id, name }) => (
-          <li
-            key={id}
-            className="flex items-center gap-2 p-2 bg-white rounded-md shadow hover:bg-gray-100 transition"
-          >
-            {/* Icon */}
-            <div className="h-6 w-6 bg-gray-300 rounded-full"></div>
-            <Link href={`/category/${id}`}>
-              <p className="text-base font-medium">{name}</p>
-            </Link>
-          </li>
-        ))}
+    <div className="w-full max-w-full max-h-[80vh] p-1">
+      <ul className="flex flex-col gap-0.5">
+        {renderMainCategories()}
         <li>
           <Link
             href="#"

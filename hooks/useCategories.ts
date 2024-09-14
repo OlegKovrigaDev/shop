@@ -1,53 +1,26 @@
-import { useState, useEffect } from "react";
-import { fetchCategories, fetchCategoryItems } from "@/api/index";
-import { TItem, TItems } from "@/types";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useActions } from "@/hooks/useActions";
+import { RootState } from "@/lib/store";
 
-export const useCategoriesWithItems = () => {
-  const [categories, setCategories] = useState<TItem[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [categoryItems, setCategoryItems] = useState<TItems[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const loadCategories = async () => {
-      try {
-        const fetchedCategories = await fetchCategories();
-        setCategories(fetchedCategories);
-      } catch (error) {
-        setError("Failed to fetch categories.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadCategories();
-  }, []);
+export const useCategories = () => {
+  const { fetchCategories } = useActions();
+  const { categories, loading, error } = useSelector(
+    (state: RootState) => state.categories
+  );
+  const [openCategories, setOpenCategories] = useState<string[]>([]);
 
   useEffect(() => {
-    if (selectedCategory) {
-      const loadCategoryItems = async () => {
-        try {
-          setLoading(true);
-          const items = await fetchCategoryItems(selectedCategory);
-          setCategoryItems(items);
-        } catch (error) {
-          setError("Failed to fetch items for selected category.");
-        } finally {
-          setLoading(false);
-        }
-      };
+    fetchCategories();
+  }, [fetchCategories]);
 
-      loadCategoryItems();
+  const toggleCategory = (categoryId: string) => {
+    if (openCategories.includes(categoryId)) {
+      setOpenCategories(openCategories.filter((id) => id !== categoryId));
+    } else {
+      setOpenCategories([...openCategories, categoryId]);
     }
-  }, [selectedCategory]);
-
-  return {
-    categories,
-    categoryItems,
-    selectedCategory,
-    setSelectedCategory,
-    loading,
-    error,
   };
+
+  return { categories, loading, error, openCategories, toggleCategory };
 };
