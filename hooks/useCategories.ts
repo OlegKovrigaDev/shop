@@ -1,19 +1,21 @@
 import { useState, useEffect } from "react";
-import { fetchCategories } from "@/api/index";
-import { TItem } from "@/types";
+import { fetchCategories, fetchCategoryItems } from "@/api/index";
+import { TItem, TItems } from "@/types";
 
-export const useCategories = () => {
-  const [fetchedItems, setFetchedItems] = useState<TItem[]>([]);
+export const useCategoriesWithItems = () => {
+  const [categories, setCategories] = useState<TItem[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [categoryItems, setCategoryItems] = useState<TItems[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadCategories = async () => {
       try {
-        const categories = await fetchCategories();
-        setFetchedItems(categories);
+        const fetchedCategories = await fetchCategories();
+        setCategories(fetchedCategories);
       } catch (error) {
-        setError("Something went wrong.");
+        setError("Failed to fetch categories.");
       } finally {
         setLoading(false);
       }
@@ -22,5 +24,30 @@ export const useCategories = () => {
     loadCategories();
   }, []);
 
-  return { fetchedItems, loading, error };
+  useEffect(() => {
+    if (selectedCategory) {
+      const loadCategoryItems = async () => {
+        try {
+          setLoading(true);
+          const items = await fetchCategoryItems(selectedCategory);
+          setCategoryItems(items);
+        } catch (error) {
+          setError("Failed to fetch items for selected category.");
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      loadCategoryItems();
+    }
+  }, [selectedCategory]);
+
+  return {
+    categories,
+    categoryItems,
+    selectedCategory,
+    setSelectedCategory,
+    loading,
+    error,
+  };
 };

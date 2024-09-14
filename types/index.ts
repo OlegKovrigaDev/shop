@@ -39,13 +39,19 @@ export type TItems = {
   categoryId: string;
   createdAt: string;
   currencyId: string;
+  name: string;
+  description: string;
   params: ProductParams;
 };
 
-export type TItem = {
+export type TItem = TCategoriesItem & {
   id: string;
   name: string;
+  products?: TProduct[];
+  subcategories?: TItem[];
+  parentId?: string;
 };
+
 export type TCategory = {
   id: string;
   items?: TItems[];
@@ -56,17 +62,17 @@ export type TCategory = {
 
 export type TCrumbs = {
   categories?: TCategoriesItem;
-  category: string;
-
+  category?: string;
+  subcategories?: TCategoriesItem[];
   title: string;
-  items: TItems[];
+  items?: TItems[];
   isProductPage: boolean;
 };
 
 type TCategoriesItem = {
-  id: string | null;
+  id: string;
   category: {
-    name: string;
+    name?: string;
   };
 };
 
@@ -168,4 +174,14 @@ export type CartModalProps = {
   total: number;
   onClose: () => void;
   onRemoveItem: (itemId: number) => void;
+};
+
+type TProduct = {
+  offerId: string;
+  params: {
+    FashionName: string;
+    RetailPrice: string;
+    RetailPriceWithDiscount?: string;
+    Articul: string;
+  };
 };

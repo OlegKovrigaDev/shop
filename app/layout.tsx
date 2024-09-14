@@ -3,8 +3,7 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.scss";
-import { CartProvider } from "@/components/сontext/CartContext";
-import { CategoryProvider } from "@/components/сontext/CategoryContext";
+import StoreProvider from "./StoreProvider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -28,11 +27,9 @@ export default function RootLayout({
           `flex flex-col min-h-screen font-sans antialiased bg-[#f8f8f8] ${fontSans.variable} relative`
         )}
       >
-        {/* <CartProvider> */}
-          <CategoryProvider>
-            <Layout>{children}</Layout>
-          </CategoryProvider>
-        {/* </CartProvider> */}
+        <StoreProvider>
+          <Layout>{children}</Layout>
+        </StoreProvider>
       </body>
     </html>
   );

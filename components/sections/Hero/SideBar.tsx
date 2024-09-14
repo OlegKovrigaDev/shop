@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import { useCategories } from "../../../hooks/useCategories";
 import { Skeleton } from "../../ui/skeleton";
+import { useCategoriesKatalog } from "@/hooks/useCategoryKatalog";
 
 export const SideBar = () => {
-  const { fetchedItems, loading, error } = useCategories();
+  const { fetchedItems, loading, error } = useCategoriesKatalog();
 
   if (loading) {
     return (

@@ -4,7 +4,6 @@ import { LayoutDashboard, MenuIcon } from "lucide-react";
 import { Logo } from "../../parts/Logo";
 import { Button } from "../../ui/button";
 import { Skeleton } from "../../ui/skeleton";
-import { useCategories } from "../../../hooks/useCategories";
 import {
   Sheet,
   SheetContent,
@@ -12,6 +11,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../../ui/sheet";
+import { useCategoriesKatalog } from "@/hooks/useCategoryKatalog";
 
 export const Menu = ({
   title,
@@ -19,7 +19,7 @@ export const Menu = ({
   classNameText,
   classNameIcon,
 }: TMenu) => {
-  const { fetchedItems, loading, error } = useCategories();
+  const { fetchedItems, loading, error } = useCategoriesKatalog();
 
   return (
     <Sheet>
