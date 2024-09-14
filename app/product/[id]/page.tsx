@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Link from "next/link";
 import { getProductById } from "@/api";
@@ -26,7 +25,7 @@ const product = async ({
         <CrumbsLink
           isProductPage={true}
           category={productId.params["Приналежність до категорії"]}
-          title={productId.params.FashionName}
+          title={productId.params.ModelName}
           items={[]}
           categories={{
             id: categoryId,

@@ -28,11 +28,15 @@ const BreadcrumbCategoryLink = ({
   isProductPage: boolean;
 }) => (
   <BreadcrumbItem>
-    <BreadcrumbLink asChild>
-      <Link href={`/category/${categories?.id}`}>
-        {categories?.category.name}
-      </Link>
-    </BreadcrumbLink>
+    {isProductPage ? (
+      <BreadcrumbLink asChild>
+        <Link href={`/category/${categories?.id}`}>
+          {categories?.category.name}
+        </Link>
+      </BreadcrumbLink>
+    ) : (
+      <span>{categories?.category.name}</span>
+    )}
   </BreadcrumbItem>
 );
 

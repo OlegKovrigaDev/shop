@@ -1,5 +1,5 @@
 "use client";
-import { TMenu } from "@/types";
+import { useEffect, useState } from "react";
 import { LayoutDashboard, MenuIcon } from "lucide-react";
 import { Logo } from "../../parts/Logo";
 import { Button } from "../../ui/button";
@@ -11,7 +11,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../../ui/sheet";
-import { useCategoriesKatalog } from "@/hooks/useCategoryKatalog";
+import { useSelector } from "react-redux";
+import { useActions } from "@/hooks/useActions";
+import { RootState } from "@/lib/store";
+import { TMenu } from "@/types";
+import Link from "next/link";
 
 export const Menu = ({
   title,
@@ -19,7 +23,56 @@ export const Menu = ({
   classNameText,
   classNameIcon,
 }: TMenu) => {
-  const { fetchedItems, loading, error } = useCategoriesKatalog();
+  const { fetchCategories } = useActions();
+  const { categories, loading, error } = useSelector(
+    (state: RootState) => state.categories
+  );
+  const [openCategories, setOpenCategories] = useState<string[]>([]);
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
+
+  const toggleCategory = (categoryId: string) => {
+    if (openCategories.includes(categoryId)) {
+      setOpenCategories(openCategories.filter((id) => id !== categoryId));
+    } else {
+      setOpenCategories([...openCategories, categoryId]);
+    }
+  };
+
+  const renderCategories = (parentId: string | null) => {
+    return categories
+      .filter((category) => category.parentId === parentId)
+      .map((category) => (
+        <li key={category.id} className="flex flex-col">
+          <div
+            onClick={() => toggleCategory(category.id)}
+            className="flex items-center gap-2 p-2 bg-white rounded-md shadow hover:bg-gray-100 transition cursor-pointer"
+          >
+            <p className="text-base font-medium">{category.name}</p>
+          </div>
+          {openCategories.includes(category.id) &&
+            categories.some((cat) => cat.parentId === category.id) && (
+              <ul className="ml-4">
+                {categories
+                  .filter((subCategory) => subCategory.parentId === category.id)
+                  .map((subCategory) => (
+                    <li key={subCategory.id} className="flex flex-col">
+                      <Link href={`/category/${subCategory.id}`}>
+                        <div className="flex items-center gap-2 p-2 bg-white rounded-md shadow hover:bg-gray-100 transition cursor-pointer">
+                          <p className="text-base font-medium">
+                            {subCategory.name}
+                          </p>
+                        </div>
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            )}
+        </li>
+      ));
+  };
 
   return (
     <Sheet>
@@ -59,16 +112,7 @@ export const Menu = ({
             <p className="text-red-500">Ошибка: {error}</p>
           ) : (
             <ul className="flex flex-col gap-4 max-h-[80vh] overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
-              {fetchedItems.map(({ id, name }) => (
-                <li
-                  key={id}
-                  className="flex items-center gap-2 p-2 bg-white rounded-md shadow hover:bg-gray-100 transition"
-                >
-                  <a href={`/category/${id}`} className="text-base font-medium">
-                    {name}
-                  </a>
-                </li>
-              ))}
+              {renderCategories(null)}
             </ul>
           )}
         </div>

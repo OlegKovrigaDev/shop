@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Link from "next/link";
 import { fetchCategoryId, fetchCategoryItems } from "@/api/index";
@@ -73,7 +72,7 @@ const category = async ({ params }: CategoryPageProps) => {
             ({
               offerId,
               params: {
-                FashionName,
+                ModelName,
                 RetailPrice,
                 RetailPriceWithDiscount,
                 Articul,
@@ -86,7 +85,7 @@ const category = async ({ params }: CategoryPageProps) => {
               >
                 <ProductCard
                   img="/slide1-min.jpg"
-                  title={FashionName}
+                  title={ModelName}
                   oldPrice={RetailPriceWithDiscount}
                   newPrice={RetailPrice}
                   Articul={Articul}
