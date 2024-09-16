@@ -23,15 +23,15 @@ export const Menu = ({
   classNameText,
   classNameIcon,
 }: TMenu) => {
-  const { fetchCategories } = useActions();
+  const { allCategories } = useActions();
   const { categories, loading, error } = useSelector(
     (state: RootState) => state.categories
   );
   const [openCategories, setOpenCategories] = useState<string[]>([]);
 
   useEffect(() => {
-    fetchCategories();
-  }, [fetchCategories]);
+    allCategories();
+  }, [allCategories]);
 
   const toggleCategory = (categoryId: string) => {
     if (openCategories.includes(categoryId)) {

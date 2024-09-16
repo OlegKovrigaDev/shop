@@ -1,10 +1,19 @@
-import { fetchCategories } from "@/lib/slices/categorySlice";
-import { fetchProductByOfferId } from "@/lib/slices/productSlice";
+import {
+  allCategories,
+  categoryById,
+  categoryItemsById,
+} from "@/lib/slices/categorySlice";
+import { getProductByOfferId } from "@/lib/slices/productSlice";
 import { bindActionCreators } from "@reduxjs/toolkit";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 
-const rootActions = { fetchCategories, fetchProductByOfferId };
+const rootActions = {
+  allCategories,
+  categoryById,
+  categoryItemsById,
+  getProductByOfferId,
+};
 
 export const useActions = () => {
   const dispatch = useDispatch();
