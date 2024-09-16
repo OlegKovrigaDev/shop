@@ -7,14 +7,14 @@ import { useActions } from "@/hooks/useActions";
 import { RootState } from "@/lib/store";
 
 export const SideBar = () => {
-  const { fetchCategories } = useActions();
+  const { allCategories } = useActions();
   const { categories, loading, error } = useSelector(
     (state: RootState) => state.categories
   );
 
   useEffect(() => {
-    fetchCategories();
-  }, [fetchCategories]);
+    allCategories();
+  }, [allCategories]);
 
   if (loading) {
     return (
@@ -42,7 +42,7 @@ export const SideBar = () => {
           <div className="flex items-center gap-2 p-2 bg-white rounded-md shadow hover:bg-gray-100 transition">
             {/* Icon */}
             <div className="h-6 w-6 bg-gray-300 rounded-full"></div>
-            <Link href={`/category/${category.id}?showAll=true`}>
+            <Link href={`/category/${category.id}`}>
               <p className="text-base font-medium">{category.name}</p>
             </Link>
           </div>

@@ -8,7 +8,7 @@ export const Categories = () => (
 				className={`relative col-span-1 ${rowSpan ? 'row-span-2' : ''}`}
 			>
 				<img src={image} className='w-full' />
-				<h3 className='absolute left-4 bottom-4 py-1 px-4 bg-[#f8f8f8] font-bold text-xl text-[#47464B]'>
+				<h3 className='absolute left-4 bottom-4 py-1 px-4 bg-[#f8f8f8] opacity-80 rounded font-bold text-xl text-[#47464B]'>
 					{name}
 				</h3>
 			</div>

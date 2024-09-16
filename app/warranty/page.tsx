@@ -1,30 +1,8 @@
-// pages/warranty-and-returns.tsx
-import { CrumbsLink } from "@/components/parts/CrumbsLink";
 import { NextPage } from "next";
 
 const WarrantyAndReturns: NextPage = () => {
-  const crumbsData = {
-    categories: {
-      id: null,
-      category: {
-        name: "Гарантія та Повернення",
-      },
-    },
-    items: [],
-    title: "Гарантія та Повернення",
-    category: "",
-    isProductPage: false,
-  };
-
   return (
     <div className="bg-gray-100 min-h-screen p-4">
-      <CrumbsLink
-        categories={crumbsData.categories}
-        items={crumbsData.items}
-        title={crumbsData.title}
-        category={crumbsData.category}
-        isProductPage={crumbsData.isProductPage}
-      />
       <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
         <div className="mb-8">
           <h2 className="text-xl font-semibold mb-4">Гарантія та Повернення</h2>

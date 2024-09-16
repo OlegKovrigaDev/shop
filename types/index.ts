@@ -32,41 +32,11 @@ export type TLayout = {
   children: ReactNode;
 };
 
-export type TItems = {
-  _id: number;
-  offerId: string;
-  available: boolean;
-  categoryId: string;
-  createdAt: string;
-  currencyId: string;
-  name: string;
-  description: string;
-  params: ProductParams;
-};
-
-export type TItem = TCategoriesItem & {
-  id: string;
-  name: string;
-  products?: TProduct[];
-  subcategories?: TItem[];
-  parentId?: string;
-};
-
-export type TCategory = {
-  id: string;
-  items?: TItems[];
-  name: string;
-  parentId: string;
-  category: {
-    name: string;
-  };
-};
-
 export type TCrumbs = {
   categories?: TCategoriesItem;
   category?: string;
   subcategories?: TCategoriesItem[];
-  title: string;
+  title?: string;
   items?: TItems[];
   isProductPage: boolean;
 };
@@ -152,19 +122,6 @@ export type ProductParams = {
   "Опис текст(сайт)": string;
 };
 
-export type Product = {
-  _id: string;
-  offerId: string;
-  type: string;
-  available: boolean;
-  currencyId: string;
-  categoryId: string;
-  params: ProductParams;
-  createdAt: string;
-  updatedAt: string;
-  imageUrl: string;
-};
-
 interface CartItem {
   id: number;
   name: string;
@@ -182,10 +139,40 @@ export type CartModalProps = {
 
 export type TProduct = {
   offerId: string;
+  params: ProductParams;
+};
+
+export type TItem = {
+  id: string;
+  name: string;
+  parentId: string;
+  category: string;
+};
+
+export type TItems = {
+  offerId: string;
   params: {
-    FashionName: string;
+    ModelName: string;
     RetailPrice: string;
-    RetailPriceWithDiscount?: string;
+    RetailPriceWithDiscount: string;
     Articul: string;
+  };
+};
+
+export type TCategory = {
+  id: string;
+  name: string;
+  parentId: string | null;
+  items: TItems[];
+};
+
+export type Product = {
+  offerId: string;
+  params: {
+    ModelName: string;
+    RetailPrice: number;
+    RetailPriceWithDiscount: number;
+    Articul: string;
+    [key: string]: any;
   };
 };

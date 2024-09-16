@@ -20,7 +20,6 @@ const BreadcrumbHomeLink = () => (
 
 const BreadcrumbCategoryLink = ({
   categories,
-  category,
   isProductPage,
 }: {
   categories: TCrumbs["categories"];

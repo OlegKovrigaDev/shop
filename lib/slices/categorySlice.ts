@@ -1,24 +1,42 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from "@/api/axios";
-import { TItem } from "@/types";
+
+import { TItem, TCategory, TItems } from "@/types";
+import { fetchCategories, fetchCategoryId, fetchCategoryItems } from "@/api";
 
 interface CategoriesState {
   categories: TItem[];
+  categoryDetails: TCategory | null;
+  items: TItems[];
   loading: boolean;
   error: string | null;
 }
 
 const initialState: CategoriesState = {
   categories: [],
+  categoryDetails: null,
+  items: [],
   loading: false,
   error: null,
 };
 
-export const fetchCategories = createAsyncThunk<TItem[], void>(
+export const allCategories = createAsyncThunk<TItem[], void>(
   "categories/fetchCategories",
   async () => {
-    const response = await axios.get<TItem[]>("/category");
-    return response.data;
+    return await fetchCategories();
+  }
+);
+
+export const categoryById = createAsyncThunk<TCategory, string>(
+  "categories/fetchCategoryById",
+  async (id) => {
+    return await fetchCategoryId(id);
+  }
+);
+
+export const categoryItemsById = createAsyncThunk<TItems[], string>(
+  "categories/fetchCategoryItems",
+  async (categoryId) => {
+    return await fetchCategoryItems(categoryId);
   }
 );
 
@@ -28,20 +46,50 @@ const categorySlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCategories.pending, (state) => {
+      .addCase(allCategories.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(
-        fetchCategories.fulfilled,
+        allCategories.fulfilled,
         (state, action: PayloadAction<TItem[]>) => {
           state.categories = action.payload;
           state.loading = false;
         }
       )
-      .addCase(fetchCategories.rejected, (state, action) => {
+      .addCase(allCategories.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ?? "Error fetching product";
+        state.error = action.error.message ?? "Error fetching categories";
+      })
+      .addCase(categoryById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        categoryById.fulfilled,
+        (state, action: PayloadAction<TCategory>) => {
+          state.categoryDetails = action.payload;
+          state.loading = false;
+        }
+      )
+      .addCase(categoryById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message ?? `Error fetching category by id`;
+      })
+      .addCase(categoryItemsById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        categoryItemsById.fulfilled,
+        (state, action: PayloadAction<TItems[]>) => {
+          state.items = action.payload;
+          state.loading = false;
+        }
+      )
+      .addCase(categoryItemsById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message ?? `Error fetching category items`;
       });
   },
 });

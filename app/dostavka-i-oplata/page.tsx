@@ -1,30 +1,8 @@
 import React from "react";
-import { CrumbsLink } from "../../components/parts/CrumbsLink";
 
 const DeliveryPaymentPage = () => {
-  const crumbsData = {
-    categories: {
-      id: null,
-      category: {
-        name: "Доставка і Оплата",
-      },
-    },
-    items: [],
-    title: "Доставка і Оплата",
-    category: "",
-    isProductPage: false,
-  }; 
-
   return (
     <div className="container mx-auto p-4">
-      <CrumbsLink
-        categories={crumbsData.categories}
-        items={crumbsData.items}
-        title={crumbsData.title}
-        category={crumbsData.category}
-        isProductPage={crumbsData.isProductPage}
-      />
-
       <h3 className="text-4xl font-bold mb-6">Доставка</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

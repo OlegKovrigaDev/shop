@@ -1,29 +1,49 @@
-import React from "react";
+"use client";
+import { useEffect } from "react";
 import Link from "next/link";
-import { fetchCategoryId, fetchCategoryItems } from "@/api/index";
+import { useSelector } from "react-redux";
 import { CrumbsLink } from "@/components/parts/CrumbsLink";
 import { FilterAccordion } from "@/components/parts/FilterAccordion";
 import { ProductCard } from "@/components/parts/ProductCard";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { RootState } from "@/lib/store";
 import { CategoryPageProps } from "@/types";
+import { useActions } from "@/hooks/useActions";
 
-const category = async ({ params }: CategoryPageProps) => {
+const CategoryPage = ({ params }: CategoryPageProps) => {
   const { id } = params;
+  const { categoryById, categoryItemsById } = useActions();
 
-  let categories = await fetchCategoryId(id);
-  let items = await fetchCategoryItems(id);
+  const { categoryDetails, items, loading, error } = useSelector(
+    (state: RootState) => state.categories
+  );
+
+  useEffect(() => {
+    categoryById(id);
+    categoryItemsById(id);
+  }, [id, categoryById, categoryItemsById]);
+
+  if (loading) {
+    return <div>Loading...</div>; 
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div className="mb-[75px]">
-      <CrumbsLink
-        categories={categories}
-        category={categories.category.name}
-        isProductPage={false}
-        title=""
-        items={[]}
-      />
+      {categoryDetails && (
+        <CrumbsLink
+          category={categoryDetails.name}
+          isProductPage={false}
+          title=""
+          items={[]}
+        />
+      )}
+
       <div className="flex flex-col gap-8 md:flex-row md:justify-between">
         <div className="flex flex-col gap-2 max-w-[280px] sm:min-w-[280px]">
           {[
@@ -67,6 +87,7 @@ const category = async ({ params }: CategoryPageProps) => {
             </FilterAccordion>
           ))}
         </div>
+
         <div className="flex flex-1 gap-y-8 justify-between flex-wrap max-w-[904px]">
           {items.map(
             ({
@@ -100,4 +121,4 @@ const category = async ({ params }: CategoryPageProps) => {
   );
 };
 
-export default category;
+export default CategoryPage;
