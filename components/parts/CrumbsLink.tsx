@@ -19,22 +19,19 @@ const BreadcrumbHomeLink = () => (
 );
 
 const BreadcrumbCategoryLink = ({
-  categories,
+  category,
   isProductPage,
 }: {
-  categories: TCrumbs["categories"];
   category: string | undefined;
   isProductPage: boolean;
 }) => (
   <BreadcrumbItem>
     {isProductPage ? (
       <BreadcrumbLink asChild>
-        <Link href={`/category/${categories?.id}`}>
-          {categories?.category.name}
-        </Link>
+        <Link href={`/category/${category}`}>{category}</Link>
       </BreadcrumbLink>
     ) : (
-      <span>{categories?.category.name}</span>
+      <span>{category}</span>
     )}
   </BreadcrumbItem>
 );
@@ -49,21 +46,14 @@ const BreadcrumbTitleLink = ({ title }: { title: string }) => (
   </BreadcrumbPage>
 );
 
-export const CrumbsLink = ({
-  categories,
-  items,
-  title,
-  category,
-  isProductPage,
-}: TCrumbs) => {
+export const CrumbsLink = ({ categories, title, isProductPage }: TCrumbs) => {
   return (
     <Breadcrumb className="py-7">
       <BreadcrumbList className="text-lg">
         <BreadcrumbHomeLink />
         <BreadcrumbSeparator />
         <BreadcrumbCategoryLink
-          categories={categories}
-          category={category}
+          category={categories?.category.name}
           isProductPage={isProductPage}
         />
         {isProductPage && title && (
