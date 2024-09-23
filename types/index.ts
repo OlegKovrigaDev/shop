@@ -81,9 +81,8 @@ export interface ISelectLang {
 }
 
 export type CategoryPageProps = {
-  params: {
-    id: string;
-  };
+  params: { id: string }
+	searchParams: { categoryId: string }
 };
 
 export type ProductPageProps {

@@ -1,6 +1,6 @@
 'use client'
 
-import { CrumbsLink, FilterAccordion } from '@/components/parts'
+import { FilterAccordion } from '@/components/parts'
 import { PageLayout } from '@/components/sections'
 import { useProductPageData } from '@/hooks'
 import { ProductPageProps } from '@/types'
@@ -16,16 +16,6 @@ export default function ProductPage({
 
 	return (
 		<>
-			<CrumbsLink
-				isProductPage={true}
-				category={product?.params['Приналежність до категорії']}
-				title={product?.params.ModelName}
-				items={[]}
-				categories={{
-					id: categoryId,
-					category: { name: product?.params['Приналежність до категорії'] },
-				}}
-			/>
 			<PageLayout
 				loading={loading}
 				error={error}
@@ -39,6 +29,8 @@ export default function ProductPage({
 					</>
 				}
 				left={<>Left</>}
+				product={product}
+				categoryId={categoryId}
 			/>
 		</>
 	)
