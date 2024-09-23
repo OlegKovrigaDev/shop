@@ -1,5 +1,5 @@
-import { LucideIcon } from "lucide-react";
-import { ReactNode } from "react";
+import { LucideIcon } from "lucide-react"
+import { ReactNode } from "react"
 
 export type TProductCard = {
   id?: string;
@@ -85,6 +85,11 @@ export type CategoryPageProps = {
     id: string;
   };
 };
+
+export type ProductPageProps {
+	params: { id: string }
+	searchParams: { categoryId: string }
+}
 
 export type TopListProps = {
   className?: string;
@@ -176,3 +181,11 @@ export type Product = {
     [key: string]: any;
   };
 };
+
+export interface PageLayoutProps {
+	className?: string
+	loading: boolean
+	error: null
+	left: ReactNode
+	right: ReactNode
+}

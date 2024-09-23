@@ -1,4 +1,5 @@
 export { Advantages } from './Advantages'
 export { Ethaps } from './Ethaps'
 export { Hero } from './Hero'
+export { PageLayout } from './PageLayout'
 export { Section } from './Section'
