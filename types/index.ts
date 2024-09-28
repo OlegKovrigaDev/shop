@@ -1,6 +1,5 @@
 import { LucideIcon } from "lucide-react";
 import { ReactNode } from "react";
-import { TItem, TItems } from "./reduxTypes";
 
 export type TProductCard = {
   id?: string;
@@ -36,10 +35,17 @@ export type TLayout = {
 export type TCrumbs = {
   categories?: TCategoriesItem;
   category?: string;
-  subcategory?: TCategoriesItem[];
+  subcategories?: TCategoriesItem[];
   title?: string;
   items?: TItems[];
   isProductPage: boolean;
+};
+
+type TCategoriesItem = {
+  id: string;
+  category: {
+    name?: string;
+  };
 };
 
 export type TSideBar = {
@@ -75,13 +81,9 @@ export interface ISelectLang {
 }
 
 export type CategoryPageProps = {
-  params: { id: string };
-  searchParams: { categoryId: string };
-};
-
-export type ProductPageProps = {
-  params: { id: string };
-  searchParams: { categoryId: string };
+  params: {
+    id: string;
+  };
 };
 
 export type TopListProps = {
@@ -93,15 +95,40 @@ export type MenuProps = {
   openSidebar?: () => void;
 };
 
-export interface PageLayoutProps {
-  className?: string;
-  loading: boolean;
-  error: null;
-  left: ReactNode;
-  right: ReactNode;
+export type ProductParams = {
+  Articul: string;
+  RetailPrice: string;
+  RetailPriceWithDiscount: string;
+  "Відображення на сайті": string;
+  ModelName: string;
+  GoodNameUA: string;
+  Уцінка: string;
+  "Одиниця виміру": string;
+  Знижка: string;
+  "Приналежність до категорії": string;
+  "Одиниця виміру терміну гарантії": string;
+  "Розділ синхронізації повністю": string;
+  "Габарит.розміри.Висота(см)(сайт)": string;
+  "Габарит.розміри.Довжина(см)(сайт)": string;
+  "Габарит.розміри.Ширина(см)(сайт)": string;
+  "Додатково ліжка(сайт ліжка)": string;
+  "Матеріал ліжка(сайт ліжка)": string;
+  "Ніша для білизни(сайт ліжка)": string;
+  "Основа під матрац(сайт ліжка)": string;
+  "Підйомний механізм(сайт ліжка)": string;
+  "Роз.спал.місц.ширина(см)(сайт)": string;
+  "Розм.спал.місц.Довжина(см)(сайт)": string;
+  "Тип ліжка(сайт ліжка)": string;
+  "Опис текст(сайт)": string;
+};
+
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  imageUrl: string;
 }
-<<<<<<< Updated upstream
-=======
 
 export type CartModalProps = {
   items: CartItem[];
@@ -149,12 +176,3 @@ export type Product = {
     [key: string]: any;
   };
 };
-
-export type TCategoriesItem = {
-  id: string;
-  category: {
-    id: string;
-    name?: string;
-  };
-};
->>>>>>> Stashed changes

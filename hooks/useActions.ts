@@ -2,6 +2,7 @@ import {
   allCategories,
   categoryById,
   categoryItemsById,
+  fetchMainCategories,
 } from "@/lib/slices/categorySlice";
 import { getProductByOfferId } from "@/lib/slices/productSlice";
 import { bindActionCreators } from "@reduxjs/toolkit";
@@ -13,6 +14,7 @@ const rootActions = {
   categoryById,
   categoryItemsById,
   getProductByOfferId,
+  fetchMainCategories,
 };
 
 export const useActions = () => {

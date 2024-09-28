@@ -1,29 +1,27 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-<<<<<<< Updated upstream
-import { fetchAllSubCategoryAndProducts, fetchCategories, fetchCategoryId, fetchCategoryItems } from "@/api";
-import { TCategory, TItem, TItems } from "@/types/reduxTypes";
-=======
 import { TItem, TCategory, TItems } from "@/types";
 import {
   fetchAllSubCategoryAndProducts,
   fetchCategories,
+  fetchCategoryId,
   fetchCategoryItems,
+  MainCategories,
 } from "@/api";
->>>>>>> Stashed changes
 
 interface CategoriesState {
-  categories: TItem[];
-  categoryDetails: TCategory | null;
-  items: TItems[];
-  loading: boolean;
-  error: string | null;
+  categories: TItem[]; // Все категории
+  categoryDetails: TCategory | null; // Детали конкретной категории
+  items: TItems[]; // Товары выбранной категории
+  subcategoryItems: TItems[]; // Товары выбранной подкатегории
+  loading: boolean; // Статус загрузки
+  error: string | null; // Ошибки
 }
 
 const initialState: CategoriesState = {
   categories: [],
   categoryDetails: null,
   items: [],
+  subcategoryItems: [],
   loading: false,
   error: null,
 };
@@ -38,7 +36,7 @@ export const allCategories = createAsyncThunk<TItem[], void>(
 export const categoryById = createAsyncThunk<TCategory, string>(
   "categories/fetchCategoryById",
   async (id) => {
-    return await fetchAllSubCategoryAndProducts(id);
+    return await fetchCategoryId(id);
   }
 );
 
@@ -46,6 +44,20 @@ export const categoryItemsById = createAsyncThunk<TItems[], string>(
   "categories/fetchCategoryItems",
   async (categoryId) => {
     return await fetchAllSubCategoryAndProducts(categoryId);
+  }
+);
+
+export const subcategoryItemsById = createAsyncThunk<TItems[], string>(
+  "categories/fetchSubcategoryItems",
+  async (subcategoryId) => {
+    return await fetchCategoryItems(subcategoryId); 
+  }
+);
+
+export const fetchMainCategories = createAsyncThunk<TItem[], void>(
+  "categories/fetchMainCategories",
+  async () => {
+    return await MainCategories();
   }
 );
 
@@ -70,6 +82,7 @@ const categorySlice = createSlice({
         state.loading = false;
         state.error = action.error.message ?? "Error fetching categories";
       })
+
       .addCase(categoryById.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -85,6 +98,7 @@ const categorySlice = createSlice({
         state.loading = false;
         state.error = action.error.message ?? `Error fetching category by id`;
       })
+
       .addCase(categoryItemsById.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -99,6 +113,38 @@ const categorySlice = createSlice({
       .addCase(categoryItemsById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message ?? `Error fetching category items`;
+      })
+      .addCase(fetchMainCategories.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        fetchMainCategories.fulfilled,
+        (state, action: PayloadAction<TItem[]>) => {
+          state.categories = action.payload;
+          state.loading = false;
+        }
+      )
+      .addCase(fetchMainCategories.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message ?? "Error fetching main categories";
+      })
+
+      .addCase(subcategoryItemsById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        subcategoryItemsById.fulfilled,
+        (state, action: PayloadAction<TItems[]>) => {
+          state.subcategoryItems = action.payload;
+          state.loading = false;
+        }
+      )
+      .addCase(subcategoryItemsById.rejected, (state, action) => {
+        state.loading = false;
+        state.error =
+          action.error.message ?? `Error fetching subcategory items`;
       });
   },
 });

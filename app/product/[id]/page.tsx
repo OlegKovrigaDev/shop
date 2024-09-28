@@ -1,21 +1,7 @@
-<<<<<<< Updated upstream
-'use client'
-
-import { FilterAccordion } from '@/components/parts'
-import { PageLayout } from '@/components/sections'
-import { useProductPageData } from '@/hooks'
-import { ProductPageProps } from '@/types'
-
-export default function ProductPage({
-	params,
-	searchParams,
-}: ProductPageProps) {
-	const { id } = params
-	const categoryId = searchParams.categoryId
-=======
 "use client";
 import Link from "next/link";
 import { useSelector } from "react-redux";
+import { CrumbsLink } from "@/components/parts/CrumbsLink";
 import { FilterAccordion } from "@/components/parts/FilterAccordion";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -23,7 +9,6 @@ import { Label } from "@/components/ui/label";
 import { useActions } from "@/hooks/useActions";
 import { RootState } from "@/lib/store";
 import { useEffect } from "react";
-import { CrumbsLink } from "@/components/parts/CrumbsLink";
 
 const ProductPage = ({
   params,
@@ -34,53 +19,29 @@ const ProductPage = ({
 }) => {
   const { id } = params;
   const categoryId = searchParams.categoryId;
-  const { getProductByOfferId, categoryById } = useActions();
+  const { getProductByOfferId } = useActions();
   const { product, loading, error } = useSelector(
     (state: RootState) => state.product
-  );
-  const { categories, categoryDetails } = useSelector(
-    (state: RootState) => state.categories
   );
 
   useEffect(() => {
     getProductByOfferId(id);
-    categoryById(categoryId);
-  }, [id, categoryId, getProductByOfferId, categoryById]);
->>>>>>> Stashed changes
+  }, [id, getProductByOfferId]);
 
-	const { product, loading, error } = useProductPageData(id)
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
-<<<<<<< Updated upstream
-	return (
-		<>
-			<PageLayout
-				loading={loading}
-				error={error}
-				right={
-					<>
-						<FilterAccordion title='Варіанти товару'></FilterAccordion>
-						<FilterAccordion title='Наявність в магазинах'></FilterAccordion>
-						<FilterAccordion title='Доставка'></FilterAccordion>
-						<FilterAccordion title='Оплата'></FilterAccordion>
-						<FilterAccordion title='Гарантія та повернення'></FilterAccordion>
-					</>
-				}
-				left={<>Left</>}
-				product={product}
-				categoryId={categoryId}
-			/>
-		</>
-	)
-}
-=======
   return (
     <>
       <CrumbsLink
-        categories={categoryDetails}
-        category={categoryDetails?.name}
-        subcategory={categoryDetails?.items}
-        title={product?.params.ModelName}
         isProductPage={true}
+        category={product?.params["Приналежність до категорії"]}
+        title={product?.params.ModelName}
+        items={[]}
+        categories={{
+          id: categoryId,
+          category: { name: product?.params["Приналежність до категорії"] },
+        }}
       />
       <div className="flex justify-between">
         <div className="w-[800px] flex flex-col gap-6">
@@ -168,4 +129,3 @@ const ProductPage = ({
 };
 
 export default ProductPage;
->>>>>>> Stashed changes

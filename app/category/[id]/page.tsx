@@ -1,14 +1,8 @@
-<<<<<<< Updated upstream
-'use client'
-import { FilterAccordionList, ProductCardList } from '@/components/parts'
-import { PageLayout } from '@/components/sections'
-import { useCategoryPageData, useProductPageData } from '@/hooks'
-import { CategoryPageProps } from '@/types'
-=======
 "use client";
 import { useEffect } from "react";
 import Link from "next/link";
 import { useSelector } from "react-redux";
+import { CrumbsLink } from "@/components/parts/CrumbsLink";
 import { FilterAccordion } from "@/components/parts/FilterAccordion";
 import { ProductCard } from "@/components/parts/ProductCard";
 import { Button } from "@/components/ui/button";
@@ -17,34 +11,11 @@ import { Label } from "@/components/ui/label";
 import { RootState } from "@/lib/store";
 import { CategoryPageProps } from "@/types";
 import { useActions } from "@/hooks/useActions";
-import { CrumbsLink } from "@/components/parts/CrumbsLink";
->>>>>>> Stashed changes
 
-export default function CategoryPage({
-	params,
-	searchParams,
-}: CategoryPageProps) {
-	const { id } = params
-	const categoryId = searchParams.categoryId
+const CategoryPage = ({ params }: CategoryPageProps) => {
+  const { id } = params;
+  const { categoryById, categoryItemsById } = useActions();
 
-<<<<<<< Updated upstream
-	const { categoryDetails, items, loading, error } = useCategoryPageData(id)
-	const { product } = useProductPageData(id)
-	return (
-		<div className='mb-16'>
-			<PageLayout
-				loading={loading}
-				error={error}
-				right={<FilterAccordionList />}
-				left={<ProductCardList items={items} id={id} />}
-				className='flex-row-reverse'
-				product={product}
-				categoryId={categoryId}
-			/>
-		</div>
-	)
-}
-=======
   const { categoryDetails, items, loading, error } = useSelector(
     (state: RootState) => state.categories
   );
@@ -64,12 +35,15 @@ export default function CategoryPage({
 
   return (
     <div className="mb-[75px]">
-      <CrumbsLink
-        categories={categoryDetails}
-        subcategory={undefined}
-        title=""
-        isProductPage={false}
-      />
+      {categoryDetails && (
+        <CrumbsLink
+          category={categoryDetails.name}
+          isProductPage={false}
+          title=""
+          items={[]}
+        />
+      )}
+
       <div className="flex flex-col gap-8 md:flex-row md:justify-between">
         <div className="flex flex-col gap-2 max-w-[280px] sm:min-w-[280px]">
           {[
@@ -148,4 +122,3 @@ export default function CategoryPage({
 };
 
 export default CategoryPage;
->>>>>>> Stashed changes
