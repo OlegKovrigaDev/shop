@@ -36,17 +36,10 @@ export type TLayout = {
 export type TCrumbs = {
   categories?: TCategoriesItem;
   category?: string;
-  subcategories?: TCategoriesItem[];
+  subcategory?: TCategoriesItem[];
   title?: string;
   items?: TItems[];
   isProductPage: boolean;
-};
-
-type TCategoriesItem = {
-  id: string;
-  category: {
-    name?: string;
-  };
 };
 
 export type TSideBar = {
@@ -107,3 +100,61 @@ export interface PageLayoutProps {
   left: ReactNode;
   right: ReactNode;
 }
+<<<<<<< Updated upstream
+=======
+
+export type CartModalProps = {
+  items: CartItem[];
+  total: number;
+  onClose: () => void;
+  onRemoveItem: (itemId: number) => void;
+};
+
+export type TProduct = {
+  offerId: string;
+  params: ProductParams;
+};
+
+export type TItem = {
+  id: string;
+  name: string;
+  parentId: string;
+  category: string;
+};
+
+export type TItems = {
+  offerId: string;
+  params: {
+    ModelName: string;
+    RetailPrice: string;
+    RetailPriceWithDiscount: string;
+    Articul: string;
+  };
+};
+
+export type TCategory = {
+  id: string;
+  name: string;
+  parentId: string | null;
+  items: TItems[];
+};
+
+export type Product = {
+  offerId: string;
+  params: {
+    ModelName: string;
+    RetailPrice: number;
+    RetailPriceWithDiscount: number;
+    Articul: string;
+    [key: string]: any;
+  };
+};
+
+export type TCategoriesItem = {
+  id: string;
+  category: {
+    id: string;
+    name?: string;
+  };
+};
+>>>>>>> Stashed changes

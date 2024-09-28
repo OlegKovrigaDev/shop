@@ -1,7 +1,16 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+<<<<<<< Updated upstream
 import { fetchAllSubCategoryAndProducts, fetchCategories, fetchCategoryId, fetchCategoryItems } from "@/api";
 import { TCategory, TItem, TItems } from "@/types/reduxTypes";
+=======
+import { TItem, TCategory, TItems } from "@/types";
+import {
+  fetchAllSubCategoryAndProducts,
+  fetchCategories,
+  fetchCategoryItems,
+} from "@/api";
+>>>>>>> Stashed changes
 
 interface CategoriesState {
   categories: TItem[];
@@ -29,7 +38,7 @@ export const allCategories = createAsyncThunk<TItem[], void>(
 export const categoryById = createAsyncThunk<TCategory, string>(
   "categories/fetchCategoryById",
   async (id) => {
-    return await fetchCategoryId(id);
+    return await fetchAllSubCategoryAndProducts(id);
   }
 );
 
