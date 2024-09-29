@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TItem, TCategory, TItems } from "@/types";
 import {
-  fetchAllSubCategoryAndProducts,
   fetchCategories,
   fetchCategoryId,
   fetchCategoryItems,
@@ -21,11 +20,12 @@ const initialState: CategoriesState = {
   categories: [],
   categoryDetails: null,
   items: [],
-  subcategoryItems: [],
+  subcategoryItems: [], // Инициализация для подкатегории
   loading: false,
   error: null,
 };
 
+// Получение всех категорий
 export const allCategories = createAsyncThunk<TItem[], void>(
   "categories/fetchCategories",
   async () => {
@@ -33,6 +33,7 @@ export const allCategories = createAsyncThunk<TItem[], void>(
   }
 );
 
+// Получение категории по ID
 export const categoryById = createAsyncThunk<TCategory, string>(
   "categories/fetchCategoryById",
   async (id) => {
@@ -40,17 +41,18 @@ export const categoryById = createAsyncThunk<TCategory, string>(
   }
 );
 
+// Получение товаров по категории ID
 export const categoryItemsById = createAsyncThunk<TItems[], string>(
   "categories/fetchCategoryItems",
   async (categoryId) => {
-    return await fetchAllSubCategoryAndProducts(categoryId);
+    return await fetchCategoryItems(categoryId);
   }
 );
 
 export const subcategoryItemsById = createAsyncThunk<TItems[], string>(
   "categories/fetchSubcategoryItems",
   async (subcategoryId) => {
-    return await fetchCategoryItems(subcategoryId); 
+    return await fetchCategoryItems(subcategoryId); // Используем тот же запрос
   }
 );
 
@@ -67,6 +69,7 @@ const categorySlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // Загрузка всех категорий
       .addCase(allCategories.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -83,6 +86,7 @@ const categorySlice = createSlice({
         state.error = action.error.message ?? "Error fetching categories";
       })
 
+      // Загрузка категории по ID
       .addCase(categoryById.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -99,6 +103,7 @@ const categorySlice = createSlice({
         state.error = action.error.message ?? `Error fetching category by id`;
       })
 
+      // Загрузка товаров для категории
       .addCase(categoryItemsById.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -129,7 +134,7 @@ const categorySlice = createSlice({
         state.loading = false;
         state.error = action.error.message ?? "Error fetching main categories";
       })
-
+      // Загрузка товаров для подкатегории
       .addCase(subcategoryItemsById.pending, (state) => {
         state.loading = true;
         state.error = null;

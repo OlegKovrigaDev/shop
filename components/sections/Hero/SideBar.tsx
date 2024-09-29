@@ -7,14 +7,14 @@ import { useActions } from "@/hooks/useActions";
 import { RootState } from "@/lib/store";
 
 export const SideBar = () => {
-  const { allCategories } = useActions();
+  const { fetchMainCategories } = useActions();
   const { categories, loading, error } = useSelector(
     (state: RootState) => state.categories
   );
 
   useEffect(() => {
-    allCategories();
-  }, [allCategories]);
+    fetchMainCategories();
+  }, [fetchMainCategories]);
 
   if (loading) {
     return (
@@ -35,7 +35,6 @@ export const SideBar = () => {
 
   const renderMainCategories = () => {
     return categories
-      .filter((category) => category.parentId === null)
       .slice(0, 10)
       .map((category) => (
         <li key={category.id} className="flex flex-col">

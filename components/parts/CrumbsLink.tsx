@@ -27,15 +27,11 @@ const BreadcrumbCategoryLink = ({
   isProductPage: boolean;
 }) => (
   <BreadcrumbItem>
-    {isProductPage ? (
-      <BreadcrumbLink asChild>
-        <Link href={`/category/${categories?.id}`}>
-          {categories?.category.name}
-        </Link>
-      </BreadcrumbLink>
-    ) : (
-      <span>{categories?.category.name}</span>
-    )}
+    <BreadcrumbLink asChild>
+      <Link href={`/category/${categories?.id}`}>
+        {categories?.category.name}
+      </Link>
+    </BreadcrumbLink>
   </BreadcrumbItem>
 );
 
@@ -62,8 +58,8 @@ export const CrumbsLink = ({
         <BreadcrumbHomeLink />
         <BreadcrumbSeparator />
         <BreadcrumbCategoryLink
-          categories={categories}
           category={category}
+          categories={categories}
           isProductPage={isProductPage}
         />
         {isProductPage && title && (
