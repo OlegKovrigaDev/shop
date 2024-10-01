@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TItem, TCategory, TItems } from "@/types";
 import {
+  fetchAllSubCategoryAndProducts,
   fetchCategories,
   fetchCategoryId,
   fetchCategoryItems,
@@ -45,7 +46,7 @@ export const categoryById = createAsyncThunk<TCategory, string>(
 export const categoryItemsById = createAsyncThunk<TItems[], string>(
   "categories/fetchCategoryItems",
   async (categoryId) => {
-    return await fetchCategoryItems(categoryId);
+    return await fetchAllSubCategoryAndProducts(categoryId);
   }
 );
 
