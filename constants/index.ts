@@ -76,33 +76,44 @@ export const categories = [
 	{ id: 6, name: 'Комоди і тумби', image: '/Categories/Cat3.jpg' },
 ]
 
-export const footerData = [
+export const footer = [
 	{
+		title: 'Контакти:',
+		schedule: [
+			{
+				id: 1,
+				field: 'Відділ продажу',
+				text: '+38 (095) 127 76 43',
+				link: 'tel:+380951277643',
+			},
+			{
+				id: 2,
+				field: 'Режим роботи',
+				text: '08:00 - 18:00 ПН - СБ 08:00 - 16:00 ВС',
+			},
+			{
+				id: 3,
+				field: 'Зворотній зв’язок',
+				text: 'info@tera-mebly.com',
+				link: 'mailto:info@tera-mebly.com',
+			},
+		],
+	},
+	{
+		title: 'Інформація:',
 		items: [
-			{ id: 1, text: 'Доставка і Оплата', link: '/dostavka-i-oplata' },
-			{ id: 2, text: 'Про нас', link: '/' },
+			{ id: 1, text: 'Про нас', link: '/' },
+			{ id: 2, text: 'Доставка і Оплата', link: '/dostavka-i-oplata' },
 			{ id: 3, text: 'Гарантія та Повернення', link: '/warranty' },
 		],
 	},
 	{
-		title: 'Зв’язатись з нами',
-		phones: [
-			{ id: 1, text: '+380666719366', link: '+380666719366' },
-			{ id: 2, text: '+380976719366', link: '+380976719366' },
-			{ id: 3, text: '+380506719366', link: '+380506719366' },
-		],
+		title: 'Ми у соцмережах:',
 		socials: [
 			{ id: 1, icon: FaFacebook, link: '/' },
 			{ id: 2, icon: FaInstagram, link: '/' },
 			{ id: 3, icon: FaTiktok, link: '/' },
 			{ id: 4, icon: FaYoutube, link: '/' },
-		],
-	},
-	{
-		title: 'Розклад',
-		schedule: [
-			{ id: 1, text: 'Будні: 09:00 - 19:00' },
-			{ id: 2, text: 'Вихідні: 09:00 - 19:00' },
 		],
 	},
 ]
