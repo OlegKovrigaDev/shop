@@ -2,27 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+	font-family: 'Montserrat', sans-serif;
+}
+
 .counter {
-  counter-reset: myCounter;
-  & li:before {
-    content: counter(myCounter);
-    counter-increment: myCounter;
-  }
+	counter-reset: myCounter;
+	& li {
+		position: relative;
+		&:before {
+			content: counter(myCounter);
+			counter-increment: myCounter;
+			position: absolute;
+			top: -50px;
+			left: -40px;
+			font-size: 128px;
+			font-weight: 800;
+		}
+	}
 }
 
 @keyframes marquee {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+	0% {
+		transform: translateX(100%);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
 }
 
 .animate-marquee {
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  animation: marquee 40s linear infinite;
+	display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	animation: marquee 40s linear infinite;
 }
-

@@ -6,21 +6,17 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
-import { ISelectLang } from '@/types'
 
-export const SelectLang = ({ placeholder, items }: ISelectLang) => {
+export const SelectLang = () => {
 	return (
-		<Select defaultValue={items[0].value}>
+		<Select defaultValue='ua'>
 			<SelectTrigger className='w-auto border-none font-medium text-lg md:text-2xl bg-transparent'>
-				<SelectValue placeholder={placeholder} />
+				<SelectValue placeholder='UA' />
 			</SelectTrigger>
 			<SelectContent>
 				<SelectGroup>
-					{items.map(({ value, text }, i) => (
-						<SelectItem key={i} value={value}>
-							{text}
-						</SelectItem>
-					))}
+					<SelectItem value='ua'>UA</SelectItem>
+					<SelectItem value='ru'>RU</SelectItem>
 				</SelectGroup>
 			</SelectContent>
 		</Select>

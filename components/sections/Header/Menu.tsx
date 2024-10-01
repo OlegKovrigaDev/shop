@@ -1,21 +1,21 @@
 "use client";
-import { useEffect, useState } from "react";
-import { LayoutDashboard, MenuIcon } from "lucide-react";
-import { Logo } from "../../parts/Logo";
-import { Button } from "../../ui/button";
-import { Skeleton } from "../../ui/skeleton";
+import { useActions } from "@/hooks/useActions"
+import { RootState } from "@/lib/store"
+import { TMenu } from "@/types"
+import { LayoutDashboard, MenuIcon } from "lucide-react"
+import Link from "next/link"
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { Logo } from "../../parts/Logo"
+import { Button } from "../../ui/button"
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "../../ui/sheet";
-import { useSelector } from "react-redux";
-import { useActions } from "@/hooks/useActions";
-import { RootState } from "@/lib/store";
-import { TMenu } from "@/types";
-import Link from "next/link";
+} from "../../ui/sheet"
+import { Skeleton } from "../../ui/skeleton"
 
 export const Menu = ({
   title,
@@ -103,7 +103,7 @@ export const Menu = ({
             <ul className="w-full max-w-full max-h-[80vh] overflow-y-scroll font-medium flex-col gap-4 scrollbar-thin scrollbar-thumb-transparent scrollbar-track-transparent">
               {Array.from({ length: 10 }).map((_, index) => (
                 <li key={index} className="flex items-center gap-2 p-2">
-                  <Skeleton className="h-6 w-6" />
+                  <Skeleton className="size-6" />
                   <Skeleton className="h-6 w-full" />
                 </li>
               ))}

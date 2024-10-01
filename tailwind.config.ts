@@ -26,6 +26,7 @@ const config = {
 			colors: {
 				accent: '#e1e1e1',
 				gray: '#47464b',
+				red: '#d81c1b',
 			},
 			keyframes: {
 				'accordion-down': {
