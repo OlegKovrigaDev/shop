@@ -6,7 +6,7 @@ import './globals.scss'
 import StoreProvider from './StoreProvider'
 
 const fontSans = FontSans({
-	subsets: ['latin'],
+	subsets: ['latin', 'cyrillic'],
 	variable: '--font-sans',
 })
 
@@ -24,7 +24,7 @@ export default function RootLayout({
 		<html lang='uk'>
 			<body
 				className={cn(
-					`flex flex-col min-h-screen font-sans antialiased bg-[#f8f8f8] ${fontSans.variable} relative`
+					`flex flex-col min-h-screen antialiased bg-[#f8f8f8] ${fontSans.variable} relative`
 				)}
 			>
 				<StoreProvider>

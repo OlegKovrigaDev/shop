@@ -1,5 +1,14 @@
 import { TProductCard } from '@/types'
 import { ShoppingCart } from 'lucide-react'
+import {
+	Badge,
+	Button,
+	Card,
+	CardContent,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from '../ui'
 
 export const ProductCard = ({
 	img,
@@ -12,51 +21,37 @@ export const ProductCard = ({
 	Articul,
 }: TProductCard) => {
 	return (
-		<div className='bg-white rounded-md max-h-[425px] w-[235px] flex flex-col justify-between relative cursor-pointer hover:shadow-lg transition-shadow duration-300'>
-			<img src={img} alt={title} className='w-full object-cover' />
-			<div className='absolute left-4 top-4 flex gap-2 flex-col'>
-				{[
-					{ id: 1, text: 'ХІТ', color: 'bg-[#4E3A9F]', condition: hit },
-					{
-						id: 2,
-						text: 'ЗНИЖКА',
-						color: 'bg-[#D81C1B]',
-						condition: discont,
-					},
-					{
-						id: 3,
-						text: 'НОВИНКА',
-						color: 'bg-[#3C9F3A]',
-						condition: newProduct,
-					},
-				]
-					.filter(type => type.condition)
-					.map(({ id, text, color }) => (
-						<span
-							key={id}
-							className={`${color} px-4 py-1 text-white text-xs font-semibold w-fit`}
-						>
-							{text}
-						</span>
-					))}
-			</div>
-			<div className='p-4 pb-2 h-[156px] flex flex-col'>
-				<h4 className='font-semibold text-xs md:text-[18px]'>{title}</h4>
-				<p className='font-semibold'>Код товару: {Articul}</p>
-				<div className='flex justify-between flex-1 items-end'>
-					<div>
-						{oldPrice !== newPrice && (
-							<p className='text-[#4E3A9F] text-xs font-semibold line-through'>
-								{newPrice} грн.
-							</p>
-						)}
-						<h3 className='text-[#D81C1B] text-[20px] font-bold'>
-							{oldPrice} грн.
-						</h3>
+		<Card className='flex flex-col justify-between rounded-none h-[425px] w-[235px] hover:shadow-xl  transition-shadow duration-300 relative p-2'>
+			<CardHeader className='p-0'>
+				<div className='relative'>
+					<Badge className='rounded-lg absolute bg-[#F34E69]'>Акція</Badge>
+					<Badge className='rounded-lg absolute top-7 bg-[#F9895E]'>Хіт</Badge>
+					<Badge className='rounded-lg absolute right-0 bg-[#A670B0]'>
+						Відео
+					</Badge>
+					<div className='w-[217px] h-[217px] bg-accent rounded-lg'>
+						{/* <img src={img} alt={title} className='rounded-lg' /> */}
 					</div>
-					<ShoppingCart />
 				</div>
-			</div>
-		</div>
+				<CardTitle className='text-[18px] line-clamp-3 h-20'>{title}</CardTitle>
+			</CardHeader>
+			<CardContent className='flex justify-between p-0 mb-6'>
+				<p className='text-green text-xs font-semibold'>● В наявності</p>
+				<p className='text-gray/40 text-xs'>Код товару: {Articul}</p>
+			</CardContent>
+			<CardFooter className='p-0 flex flex-col items-start'>
+				{oldPrice !== newPrice && (
+					<p className='line-through font-medium'>{newPrice} грн.</p>
+				)}
+				<p className='text-red text-[20px] font-bold'>{oldPrice} грн.</p>
+				<Button
+					variant='ghost'
+					size='icon'
+					className='absolute right-0 bottom-0 z-50'
+				>
+					<ShoppingCart />
+				</Button>
+			</CardFooter>
+		</Card>
 	)
 }

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-	font-family: 'Montserrat', sans-serif;
+	font-family: var(--font-sans);
 }
 
 .counter {
@@ -15,7 +15,7 @@ body {
 			counter-increment: myCounter;
 			position: absolute;
 			top: -50px;
-			left: -40px;
+			left: -30px;
 			font-size: 128px;
 			font-weight: 800;
 		}
