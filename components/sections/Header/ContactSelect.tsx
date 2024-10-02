@@ -1,35 +1,35 @@
 import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/ui/select'
-import { Headset } from 'lucide-react'
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from '@radix-ui/react-dropdown-menu'
+import { ChevronDown, Headset } from 'lucide-react'
+import Link from 'next/link'
 
 export const ContactSelect = () => {
 	return (
 		<>
-			<Select defaultValue='phone1'>
-				<SelectTrigger className='w-auto border-none text-lg md:text-2xl bg-transparent'>
-					<div className='flex flex-col items-end'>
-						<div className='flex gap-1 items-center'>
-							<Headset />
-							<SelectValue placeholder='095-12-77-643' />
-						</div>
-						<span className='md:block hidden text-xs -mt-2'>
+			<DropdownMenu>
+				<DropdownMenuTrigger className='flex items-center justify-between gap-1'>
+					<Headset />
+					<div>
+						<p className='text-xl mb-1 font-medium'>095-12-77-643</p>
+						<p className='md:block hidden text-xs font-normal -mt-2'>
 							Контактні телефони
-						</span>
+						</p>
 					</div>
-				</SelectTrigger>
-				<SelectContent>
-					<SelectGroup>
-						<SelectItem value='phone1'>095-12-77-643</SelectItem>
-						<SelectItem value='phone2'>095-12-77-543</SelectItem>
-					</SelectGroup>
-				</SelectContent>
-			</Select>
+					<ChevronDown size={16} />
+				</DropdownMenuTrigger>
+				<DropdownMenuContent className='rounded-2xl bg-white p-4'>
+					{/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
+					<DropdownMenuSeparator />
+					<DropdownMenuItem>
+						<Link href='tel:+380951277643'>095-12-77-643</Link>
+					</DropdownMenuItem>
+				</DropdownMenuContent>
+			</DropdownMenu>
 		</>
 	)
 }

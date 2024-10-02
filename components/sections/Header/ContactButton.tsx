@@ -12,7 +12,7 @@ export const ContactButton = () => {
 				<MapPinned size={24} />
 				<span className='hidden md:flex-wrap md:flex text-xs'>Магазини</span>
 			</HoverCardTrigger>
-			<HoverCardContent className='w-[400px]'>
+			<HoverCardContent className='w-[400px] rounded-2xl'>
 				<ul className='flex flex-col gap-4'>
 					{[
 						{
