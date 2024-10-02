@@ -20,13 +20,22 @@ export const ProductCard = ({
 	newProduct,
 	Articul,
 }: TProductCard) => {
+	const result = (
+		(((newPrice as any) - (oldPrice as any)) / (oldPrice as any)) *
+		100
+	).toFixed(0)
+
 	return (
 		<Card className='flex flex-col justify-between rounded-none h-[425px] w-[235px] hover:shadow-xl  transition-shadow duration-300 relative p-2'>
 			<CardHeader className='p-0'>
 				<div className='relative'>
-					<Badge className='rounded-lg absolute bg-[#F34E69]'>Акція</Badge>
-					<Badge className='rounded-lg absolute top-7 bg-[#F9895E]'>Хіт</Badge>
-					<Badge className='rounded-lg absolute right-0 bg-[#A670B0]'>
+					<Badge className='rounded-lg absolute bg-[#F34E69] hover:bg-[#F34E69]'>
+						Акція
+					</Badge>
+					<Badge className='rounded-lg absolute top-7 bg-[#F9895E] hover:bg-[#F9895E]'>
+						Хіт
+					</Badge>
+					<Badge className='rounded-lg absolute right-0 bg-[#A670B0] hover:bg-[#A670B0]'>
 						Відео
 					</Badge>
 					<div className='w-[217px] h-[217px] bg-accent rounded-lg'>
@@ -41,13 +50,16 @@ export const ProductCard = ({
 			</CardContent>
 			<CardFooter className='p-0 flex flex-col items-start'>
 				{oldPrice !== newPrice && (
-					<p className='line-through font-medium'>{newPrice} грн.</p>
+					<div className='flex gap-2'>
+						<p className='line-through font-medium'>{newPrice} грн.</p>
+						<Badge className='rounded-lg bg-red hover:bg-red'>-{result}%</Badge>
+					</div>
 				)}
 				<p className='text-red text-[20px] font-bold'>{oldPrice} грн.</p>
 				<Button
 					variant='ghost'
 					size='icon'
-					className='absolute right-0 bottom-0 z-50'
+					className='absolute right-0 bottom-0'
 				>
 					<ShoppingCart />
 				</Button>
