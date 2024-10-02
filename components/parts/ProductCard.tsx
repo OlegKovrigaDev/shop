@@ -26,7 +26,7 @@ export const ProductCard = ({
 	).toFixed(0)
 
 	return (
-		<Card className='flex flex-col justify-between rounded-none h-[425px] w-[235px] hover:shadow-xl  transition-shadow duration-300 relative p-2'>
+		<Card className='flex flex-col justify-between rounded-none h-[288px] md:h-[425px] w-[158px] md:w-[235px] hover:shadow-xl  transition-shadow duration-300 relative p-2'>
 			<CardHeader className='p-0'>
 				<div className='relative'>
 					<Badge className='rounded-lg absolute bg-[#F34E69] hover:bg-[#F34E69]'>
@@ -38,8 +38,8 @@ export const ProductCard = ({
 					<Badge className='rounded-lg absolute right-0 bg-[#A670B0] hover:bg-[#A670B0]'>
 						Відео
 					</Badge>
-					<div className='w-[217px] h-[217px] bg-accent rounded-lg'>
-						{/* <img src={img} alt={title} className='rounded-lg' /> */}
+					<div className='w-[142px] h-[142] md:w-[217px] md:h-[217px] bg-accent rounded-lg'>
+						<img src={img} alt={title} className='rounded-lg' />
 					</div>
 				</div>
 				<CardTitle className='text-[18px] line-clamp-3 h-20'>{title}</CardTitle>

@@ -1,10 +1,12 @@
 'use client'
+import { ModalPage } from '@/components/parts/ModalPage'
 import { useState } from 'react'
 import { Logo } from '../../parts/Logo'
+import { ContactButton } from './ContactButton'
 import { Menu } from './Menu'
 import { SearchBar } from './SearchBar'
 import { SelectLang } from './SelectLang'
-import { TopList } from './TopList'
+import { ContactSelect } from './ContactSelect'
 
 const MobileTop = () => {
 	const [isSearchVisible, setIsSearchVisible] = useState(false)
@@ -20,7 +22,7 @@ const MobileTop = () => {
 				<SearchBar onSearchToggle={setIsSearchVisible} />
 				{!isSearchVisible && (
 					<>
-						<TopList />
+						<ModalPage />
 						<Menu title='Каталог' />
 					</>
 				)}
@@ -30,12 +32,18 @@ const MobileTop = () => {
 }
 
 const DesktopTop = () => (
-	<div className='container py-6 items-center gap-7 hidden md:flex'>
-		<Logo />
-		<SelectLang />
-		<Menu title='Каталог' />
+	<div className='container py-6 items-center gap-7 hidden md:flex justify-between'>
+		<div className='flex gap-7'>
+			<Logo />
+			<Menu title='Каталог' />
+			<ContactButton />
+		</div>
 		<SearchBar onSearchToggle={() => {}} />
-		<TopList />
+		<div className='flex gap-7'>
+			<ContactSelect />
+			<SelectLang />
+			<ModalPage />
+		</div>
 	</div>
 )
 
