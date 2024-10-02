@@ -12,11 +12,11 @@ export const Footer = () => {
 						<p className='font-semibold text-2xl mb-1'>{column.title}</p>
 
 						{column.schedule && (
-							<div className='flex flex-col lg:flex-row flex-wrap justify-between md:w-80'>
+							<div className='flex flex-col lg:flex-row flex-wrap justify-between md:w-96'>
 								{column.schedule.map(({ id, field, text, link }) => (
 									<>
 										<p className=''>{field}</p>
-										<p key={id} className='mb-1 max-w-[156px] text-left'>
+										<p key={id} className='mb-1 max-w-44'>
 											{link ? <Link href={link}>{text}</Link> : <>{text}</>}
 										</p>
 									</>
