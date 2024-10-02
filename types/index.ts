@@ -1,174 +1,169 @@
-import { LucideIcon } from 'lucide-react'
-import { ReactNode } from 'react'
+import { LucideIcon } from "lucide-react";
+import { ReactNode } from "react";
 
 export type TProductCard = {
-	id?: string
-	img?: string
-	title?: string
-	oldPrice?: string
-	newPrice?: string
-	hit?: boolean
-	discont?: boolean
-	newProduct?: boolean
-	Articul?: string
-	offerId?: string
-}
+  id?: string;
+  img?: string;
+  title?: string;
+  oldPrice?: string;
+  newPrice?: string;
+  hit?: boolean;
+  discont?: boolean;
+  newProduct?: boolean;
+  Articul?: string;
+  offerId?: string;
+};
 
 export type TProductSlider = {
-	arr: TProductCard[]
-}
+  arr: TProductCard[];
+};
 
 export type TTitle = {
-	children: ReactNode
-}
+  children: ReactNode;
+};
 
 export type TSection = {
-	title: string
-	children?: ReactNode
-	className?: string
-}
+  title: string;
+  children?: ReactNode;
+  className?: string;
+};
 
 export type TLayout = {
-	children: ReactNode
-}
+  children: ReactNode;
+};
 
 export type TCrumbs = {
-	categories?: TCategoriesItem
-	category?: string
-	subcategories?: TCategoriesItem[]
-	title?: string
-	items?: TItems[]
-	isProductPage: boolean
-}
+  categories?: TCategoriesItem;
+  category?: string;
+  subcategories?: TCategoriesItem[];
+  title?: string;
+  items?: TItems[];
+  isProductPage: boolean;
+};
 
 type TCategoriesItem = {
-	id: string
-	category: {
-		name?: string
-	}
-}
+  id: string;
+  category: {
+    name?: string;
+  };
+};
 
 export type TSideBar = {
-	items: TItem[]
-}
+  items: TItem[];
+};
 
 export type TCartPopup = {
-	text: string
-}
+  text: string;
+};
 
 export type THoverMenu = {
-	icon: LucideIcon
-	link: string
-	text: string
-	children: ReactNode
-}
+  icon: LucideIcon;
+  link: string;
+  text: string;
+  children: ReactNode;
+};
 
 export type TMenu = {
-	children?: ReactNode
-	title?: string
-	className?: string
-	classNameText?: string
-	classNameIcon?: string
-}
+  children?: ReactNode;
+  title?: string;
+  className?: string;
+  classNameText?: string;
+  classNameIcon?: string;
+};
 
 export type TItemLang = {
-	value: string
-	text: string
-}
+  value: string;
+  text: string;
+};
 
 export type CategoryPageProps = {
-	params: {
-		id: string
-	}
-}
+  params: {
+    id: string;
+  };
+};
 
 export type TopListProps = {
-	className?: string
-}
+  className?: string;
+};
 
 export type MenuProps = {
-	children: ReactNode
-	openSidebar?: () => void
-}
+  children: ReactNode;
+  openSidebar?: () => void;
+};
 
 export type ProductParams = {
-	Articul: string
-	RetailPrice: string
-	RetailPriceWithDiscount: string
-	'Відображення на сайті': string
-	ModelName: string
-	GoodNameUA: string
-	Уцінка: string
-	'Одиниця виміру': string
-	Знижка: string
-	'Приналежність до категорії': string
-	'Одиниця виміру терміну гарантії': string
-	'Розділ синхронізації повністю': string
-	'Габарит.розміри.Висота(см)(сайт)': string
-	'Габарит.розміри.Довжина(см)(сайт)': string
-	'Габарит.розміри.Ширина(см)(сайт)': string
-	'Додатково ліжка(сайт ліжка)': string
-	'Матеріал ліжка(сайт ліжка)': string
-	'Ніша для білизни(сайт ліжка)': string
-	'Основа під матрац(сайт ліжка)': string
-	'Підйомний механізм(сайт ліжка)': string
-	'Роз.спал.місц.ширина(см)(сайт)': string
-	'Розм.спал.місц.Довжина(см)(сайт)': string
-	'Тип ліжка(сайт ліжка)': string
-	'Опис текст(сайт)': string
-}
+  Articul: string;
+  RetailPrice: string;
+  RetailPriceWithDiscount: string;
+  "Відображення на сайті": string;
+  ModelName: string;
+  GoodNameUA: string;
+  Уцінка: string;
+  "Одиниця виміру": string;
+  Знижка: string;
+  "Приналежність до категорії": string;
+  "Одиниця виміру терміну гарантії": string;
+  "Розділ синхронізації повністю": string;
+  "Габарит.розміри.Висота(см)(сайт)": string;
+  "Габарит.розміри.Довжина(см)(сайт)": string;
+  "Габарит.розміри.Ширина(см)(сайт)": string;
+  "Додатково ліжка(сайт ліжка)": string;
+  "Матеріал ліжка(сайт ліжка)": string;
+  "Ніша для білизни(сайт ліжка)": string;
+  "Основа під матрац(сайт ліжка)": string;
+  "Підйомний механізм(сайт ліжка)": string;
+  "Роз.спал.місц.ширина(см)(сайт)": string;
+  "Розм.спал.місц.Довжина(см)(сайт)": string;
+  "Тип ліжка(сайт ліжка)": string;
+  "Опис текст(сайт)": string;
+};
 
 interface CartItem {
-	id: number
-	name: string
-	price: number
-	quantity: number
-	imageUrl: string
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  imageUrl: string;
 }
 
 export type CartModalProps = {
-	items: CartItem[]
-	total: number
-	onClose: () => void
-	onRemoveItem: (itemId: number) => void
-}
+  items: CartItem[];
+  total: number;
+  onClose: () => void;
+  onRemoveItem: (itemId: number) => void;
+};
 
 export type TProduct = {
-	offerId: string
-	params: ProductParams
-}
+  offerId: string;
+  params: ProductParams;
+};
 
 export type TItem = {
-	id: string
-	name: string
-	parentId: string
-	category: string
-}
+  id: string;
+  name: string;
+  parentId: string;
+  category: string;
+};
 
 export type TItems = {
-	offerId: string
-	params: {
-		ModelName: string
-		RetailPrice: string
-		RetailPriceWithDiscount: string
-		Articul: string
-	}
-}
+  offerId: string;
+  params: ProductParams;
+};
 
 export type TCategory = {
-	id: string
-	name: string
-	parentId: string | null
-	items: TItems[]
-}
+  id: string;
+  name: string;
+  parentId: string | null;
+  items: TItems[];
+};
 
 export type Product = {
-	offerId: string
-	params: {
-		ModelName: string
-		RetailPrice: number
-		RetailPriceWithDiscount: number
-		Articul: string
-		[key: string]: any
-	}
-}
+  offerId: string;
+  params: {
+    ModelName: string;
+    RetailPrice: number;
+    RetailPriceWithDiscount: number;
+    Articul: string;
+    [key: string]: any;
+  };
+};
