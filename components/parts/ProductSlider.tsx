@@ -26,8 +26,8 @@ export const ProductSlider = ({ arr }: TProductSlider) => {
 					</CarouselItem>
 				))}
 			</CarouselContent>
-			<CarouselPrevious className='absolute left-2' />
-			<CarouselNext className='absolute right-2' />
+			<CarouselPrevious className='absolute left-1' />
+			<CarouselNext className='absolute right-3' />
 		</Carousel>
 	)
 }
