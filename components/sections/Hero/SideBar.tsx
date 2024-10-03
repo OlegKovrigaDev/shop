@@ -7,14 +7,14 @@ import { useActions } from "@/hooks/useActions";
 import { RootState } from "@/lib/store";
 
 export const SideBar = () => {
-  const { fetchMainCategories } = useActions();
+  const { allMainAndSubCategories } = useActions();
   const { categories, loading, error } = useSelector(
     (state: RootState) => state.categories
   );
 
   useEffect(() => {
-    fetchMainCategories();
-  }, [fetchMainCategories]);
+    allMainAndSubCategories();
+  }, [allMainAndSubCategories]);
 
   if (loading) {
     return (
@@ -34,17 +34,20 @@ export const SideBar = () => {
   }
 
   const renderMainCategories = () => {
-    return categories.slice(1, 12).map((category) => (
-      <li key={category.id} className="flex flex-col">
-        <div className="flex items-center gap-2 p-2  transition">
-          {/* Icon */}
-          <div className="h-6 w-6 bg-gray-300 rounded-full"></div>
-          <Link href={`/category/${category.id}`}>
-            <p className="text-base font-medium">{category.name}</p>
-          </Link>
-        </div>
-      </li>
-    ));
+    return categories
+      .filter((category) => category.parentId === null)
+      .slice(0, 8)
+      .map((category) => (
+        <li key={category.id} className="flex flex-col">
+          <div className="flex items-center gap-2 p-2  transition">
+            {/* Icon */}
+            <div className="h-6 w-6 bg-gray-300 rounded-full"></div>
+            <Link href={`/category/${category.id}`}>
+              <p className="text-base font-medium">{category.name}</p>
+            </Link>
+          </div>
+        </li>
+      ));
   };
 
   return (

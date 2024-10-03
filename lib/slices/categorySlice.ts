@@ -1,66 +1,67 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TItem, TCategory, TItems } from "@/types";
 import {
-  fetchAllSubCategoryAndProducts,
-  fetchCategories,
+  AllMainAndSubCategories,
   fetchCategoryId,
   fetchCategoryItems,
-  MainCategories,
+  fetchSubcategories,
 } from "@/api";
+import {
+  TCategory,
+  TCategoryWithSubcategories,
+  TItems,
+} from "@/types/reduxTypes";
 
 interface CategoriesState {
-  categories: TItem[]; // Все категории
-  categoryDetails: TCategory | null; // Детали конкретной категории
-  items: TItems[]; // Товары выбранной категории
-  subcategoryItems: TItems[]; // Товары выбранной подкатегории
-  loading: boolean; // Статус загрузки
-  error: string | null; // Ошибки
+  categories: TCategoryWithSubcategories[];
+  categoryDetails: TCategory | null;
+  items: TItems[];
+  subcategoryItems: TItems[];
+  subcategories: TCategory[];
+  loading: boolean;
+  error: string | null;
 }
 
 const initialState: CategoriesState = {
   categories: [],
   categoryDetails: null,
   items: [],
-  subcategoryItems: [], // Инициализация для подкатегории
+  subcategoryItems: [],
+  subcategories: [],
   loading: false,
   error: null,
 };
 
-// Получение всех категорий
-export const allCategories = createAsyncThunk<TItem[], void>(
-  "categories/fetchCategories",
-  async () => {
-    return await fetchCategories();
-  }
-);
+export const allMainAndSubCategories = createAsyncThunk<
+  TCategoryWithSubcategories[],
+  void
+>("categories/fetchAllMainAndSubCategories", async () => {
+  return await AllMainAndSubCategories();
+});
 
-// Получение категории по ID
 export const categoryById = createAsyncThunk<TCategory, string>(
   "categories/fetchCategoryById",
   async (id) => {
-    return await fetchCategoryId(id);
+    try {
+      const response = await fetchCategoryId(id);
+      return response;
+    } catch (error) {
+      throw error;
+    }
   }
 );
 
-// Получение товаров по категории ID
 export const categoryItemsById = createAsyncThunk<TItems[], string>(
   "categories/fetchCategoryItems",
   async (categoryId) => {
-    return await fetchAllSubCategoryAndProducts(categoryId);
-  }
-);
-
-export const subcategoryItemsById = createAsyncThunk<TItems[], string>(
-  "categories/fetchSubcategoryItems",
-  async (subcategoryId) => {
-    return await fetchCategoryItems(subcategoryId); // Используем тот же запрос
-  }
-);
-
-export const fetchMainCategories = createAsyncThunk<TItem[], void>(
-  "categories/fetchMainCategories",
-  async () => {
-    return await MainCategories();
+    const response = await fetchCategoryItems(categoryId);
+    if (response.length === 0 && categoryId) {
+      const subcategories = await fetchSubcategories(categoryId);
+      const items = await Promise.all(
+        subcategories.map((subcategoryId) => fetchCategoryItems(subcategoryId))
+      );
+      return items.flat();
+    }
+    return response;
   }
 );
 
@@ -70,24 +71,23 @@ const categorySlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Загрузка всех категорий
-      .addCase(allCategories.pending, (state) => {
+
+      .addCase(allMainAndSubCategories.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(
-        allCategories.fulfilled,
-        (state, action: PayloadAction<TItem[]>) => {
+        allMainAndSubCategories.fulfilled,
+        (state, action: PayloadAction<TCategoryWithSubcategories[]>) => {
           state.categories = action.payload;
           state.loading = false;
         }
       )
-      .addCase(allCategories.rejected, (state, action) => {
+      .addCase(allMainAndSubCategories.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ?? "Error fetching categories";
+        state.error = action.error.message ?? "Error fetching categories.";
       })
 
-      // Загрузка категории по ID
       .addCase(categoryById.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -101,10 +101,9 @@ const categorySlice = createSlice({
       )
       .addCase(categoryById.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ?? `Error fetching category by id`;
+        state.error = action.error.message ?? "Error fetching category by ID.";
       })
 
-      // Загрузка товаров для категории
       .addCase(categoryItemsById.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -118,39 +117,7 @@ const categorySlice = createSlice({
       )
       .addCase(categoryItemsById.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ?? `Error fetching category items`;
-      })
-      .addCase(fetchMainCategories.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(
-        fetchMainCategories.fulfilled,
-        (state, action: PayloadAction<TItem[]>) => {
-          state.categories = action.payload;
-          state.loading = false;
-        }
-      )
-      .addCase(fetchMainCategories.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message ?? "Error fetching main categories";
-      })
-      // Загрузка товаров для подкатегории
-      .addCase(subcategoryItemsById.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(
-        subcategoryItemsById.fulfilled,
-        (state, action: PayloadAction<TItems[]>) => {
-          state.subcategoryItems = action.payload;
-          state.loading = false;
-        }
-      )
-      .addCase(subcategoryItemsById.rejected, (state, action) => {
-        state.loading = false;
-        state.error =
-          action.error.message ?? `Error fetching subcategory items`;
+        state.error = action.error.message ?? "Error fetching category items.";
       });
   },
 });

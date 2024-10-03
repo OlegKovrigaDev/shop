@@ -21,12 +21,12 @@ const CategoryPage = ({ params }: CategoryPageProps) => {
   );
 
   useEffect(() => {
-    categoryById(id);
-    categoryItemsById(id);
+    categoryById(id.toString());
+    categoryItemsById(id.toString());
   }, [id, categoryById, categoryItemsById]);
 
   if (loading) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
 
   if (error) {
@@ -37,7 +37,7 @@ const CategoryPage = ({ params }: CategoryPageProps) => {
     <div className="mb-[75px]">
       {categoryDetails && (
         <CrumbsLink
-          category={categoryDetails.name}
+          category={(categoryDetails.id, categoryDetails.name)}
           isProductPage={false}
           title=""
           items={[]}

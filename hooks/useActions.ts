@@ -1,8 +1,7 @@
 import {
-  allCategories,
+  allMainAndSubCategories,
   categoryById,
   categoryItemsById,
-  fetchMainCategories,
 } from "@/lib/slices/categorySlice";
 import { getProductByOfferId } from "@/lib/slices/productSlice";
 import { bindActionCreators } from "@reduxjs/toolkit";
@@ -10,11 +9,10 @@ import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 
 const rootActions = {
-  allCategories,
   categoryById,
   categoryItemsById,
   getProductByOfferId,
-  fetchMainCategories,
+  allMainAndSubCategories,
 };
 
 export const useActions = () => {

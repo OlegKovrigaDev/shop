@@ -1,18 +1,37 @@
-import { TItem, TItems, TCategory, Product } from "@/types";
+import {
+  Product,
+  TCategory,
+  TCategoryWithSubcategories,
+  TItems,
+} from "@/types/reduxTypes";
 import axiosClient from "./axios";
 
-export const fetchCategories = async (): Promise<TItem[]> => {
-  const response = await axiosClient.get<TItem[]>("/category");
+export const AllMainAndSubCategories = async (): Promise<
+  TCategoryWithSubcategories[]
+> => {
+  try {
+    const response = await axiosClient.get<TCategory[]>("/category");
+    const mainCategories = response.data.filter(
+      (category) =>
+        category.parentId === null || category.parentId === undefined
+    );
 
-  return response.data;
-};
+    const categoriesWithSubcategories = await Promise.all(
+      mainCategories.map(async (category) => {
+        const subcategoriesResponse = await axiosClient.get<TCategory[]>(
+          `/category/sub/${category.id}`
+        );
+        const subcategories = subcategoriesResponse.data;
 
-export const MainCategories = async (): Promise<TItem[]> => {
-  const response = await axiosClient.get<TItem[]>("/category");
-  const categories = response.data.filter(
-    (category) => category.parentId === null || category.parentId === undefined
-  );
-  return categories;
+        return { ...category, subcategories };
+      })
+    );
+
+    return categoriesWithSubcategories;
+  } catch (error) {
+    console.error("Ошибка при получении категорий и подкатегорий:", error);
+    return [];
+  }
 };
 
 export const fetchCategoryItems = async (
@@ -21,38 +40,23 @@ export const fetchCategoryItems = async (
   const response = await axiosClient.get<{ products: TItems[] }>(
     `/category/${categoryId}`
   );
+
   return response.data.products;
 };
 
-export const fetchAllSubCategoryAndProducts = async (
-  categoryId: string
-): Promise<TItems[]> => {
-  const response = await axiosClient.get<{ products: TItems[] }>(
-    `/category/${categoryId}`
-  );
-  let products = response.data.products;
-
-  const subCategoriesResponse = await axiosClient.get<TCategory[]>(
-    `/category?parentId=${categoryId}`
-  );
-  const subCategories = subCategoriesResponse.data;
-
-  for (let subCategory of subCategories) {
-    const subCategoryProductsResponse = await axiosClient.get<{
-      products: TItems[];
-    }>(`/category/${subCategory.id}`);
-    products = [...products, ...subCategoryProductsResponse.data.products];
-  }
-
-  return products;
-};
-
 export const fetchCategoryId = async (id: string): Promise<TCategory> => {
-  const response = await axiosClient.get<TCategory>(`/category/${id}`);
-  return response.data;
+  const { data } = await axiosClient.get<TCategory>(`/category/${id}`);
+  return data;
 };
-
 export const getProductById = async (offerId: string): Promise<Product> => {
-  const response = await axiosClient.get<Product>(`/product/${offerId}`);
-  return response.data;
+  const { data } = await axiosClient.get<Product>(`/product/${offerId}`);
+  return data;
+};
+export const fetchSubcategories = async (
+  categoryId: string
+): Promise<TCategory[]> => {
+  const { data } = await axiosClient.get<TCategory[]>(
+    `/category/sub/${categoryId}`
+  );
+  return data;
 };
