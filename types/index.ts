@@ -43,8 +43,11 @@ export type TCrumbs = {
 
 type TCategoriesItem = {
   id: string;
+  subcategories?: TCategoriesItem[];
+  name?: string;
   category: {
-    name?: string;
+    name?: string | undefined;
+    id?: string | undefined;
   };
 };
 

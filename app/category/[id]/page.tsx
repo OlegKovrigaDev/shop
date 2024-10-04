@@ -37,7 +37,7 @@ const CategoryPage = ({ params }: CategoryPageProps) => {
     <div className="mb-[75px]">
       {categoryDetails && (
         <CrumbsLink
-          category={(categoryDetails.id, categoryDetails.name)}
+          categories={categoryDetails}
           isProductPage={false}
           title=""
           items={[]}

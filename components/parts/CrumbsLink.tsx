@@ -27,6 +27,15 @@ export const CrumbsLink = ({ categories, title, isProductPage }: TCrumbs) => {
                 {categories?.category.name}
               </Link>
             </BreadcrumbLink>
+            { categories?.subcategories && (
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href={`/category/sub/${categories?.id}`}>
+                    {categories?.subcategories[0].name}
+                  </Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+            )}
           </BreadcrumbItem>
         )}
         {isProductPage && title && (
