@@ -46,6 +46,8 @@ export const fetchCategoryItems = async (
 
 export const fetchCategoryId = async (id: string): Promise<TCategory> => {
   const { data } = await axiosClient.get<TCategory>(`/category/${id}`);
+  console.log({data});
+
   return data;
 };
 export const getProductById = async (offerId: string): Promise<Product> => {

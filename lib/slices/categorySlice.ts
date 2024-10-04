@@ -53,15 +53,24 @@ export const categoryById = createAsyncThunk<TCategory, string>(
 export const categoryItemsById = createAsyncThunk<TItems[], string>(
   "categories/fetchCategoryItems",
   async (categoryId) => {
-    const response = await fetchCategoryItems(categoryId);
-    if (response.length === 0 && categoryId) {
-      const subcategories = await fetchSubcategories(categoryId);
-      const items = await Promise.all(
-        subcategories.map((subcategoryId) => fetchCategoryItems(subcategoryId))
-      );
-      return items.flat();
+    try {
+      const response = await fetchCategoryItems(categoryId);
+
+      if (response.length === 0 && categoryId) {
+        const subcategories = await fetchSubcategories(categoryId);
+
+        const items = await Promise.all(
+          subcategories.map((subcategory) => fetchCategoryItems(subcategory.id))
+        );
+
+        return items.flat();
+      }
+
+      return response;
+    } catch (error) {
+      console.error("Error fetching category items:", error);
+      throw error;
     }
-    return response;
   }
 );
 

@@ -19,6 +19,7 @@ const CategoryPage = ({ params }: CategoryPageProps) => {
   const { categoryDetails, items, loading, error } = useSelector(
     (state: RootState) => state.categories
   );
+  // console.table(categoryDetails);
 
   useEffect(() => {
     categoryById(id.toString());

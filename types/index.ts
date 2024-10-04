@@ -48,6 +48,7 @@ type TCategoriesItem = {
   category: {
     name?: string | undefined;
     id?: string | undefined;
+    parentId?: string | null | undefined;
   };
 };
 
