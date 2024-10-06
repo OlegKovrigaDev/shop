@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   AllMainAndSubCategories,
+  AllMainCategories,
   fetchCategoryId,
   fetchCategoryItems,
   fetchSubcategories,
@@ -13,6 +14,7 @@ import {
 
 interface CategoriesState {
   categories: TCategoryWithSubcategories[];
+  mainCategories: TCategoryWithSubcategories[];
   categoryDetails: TCategory | null;
   items: TItems[];
   subcategoryItems: TItems[];
@@ -23,6 +25,7 @@ interface CategoriesState {
 
 const initialState: CategoriesState = {
   categories: [],
+  mainCategories: [],
   categoryDetails: null,
   items: [],
   subcategoryItems: [],
@@ -30,6 +33,13 @@ const initialState: CategoriesState = {
   loading: false,
   error: null,
 };
+
+export const mainCategories = createAsyncThunk<
+  TCategoryWithSubcategories[],
+  void
+>("categories/fetchMainCategories", async () => {
+  return await AllMainCategories();
+});
 
 export const allMainAndSubCategories = createAsyncThunk<
   TCategoryWithSubcategories[],
@@ -80,7 +90,10 @@ const categorySlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-
+      .addCase(mainCategories.fulfilled, (state, action) => {
+        state.mainCategories = action.payload;
+        state.loading = false;
+      })
       .addCase(allMainAndSubCategories.pending, (state) => {
         state.loading = true;
         state.error = null;

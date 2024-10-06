@@ -35,9 +35,7 @@ const ProductPage = ({
     <>
       <CrumbsLink
         isProductPage={true}
-        category={product?.params["Приналежність до категорії"]}
         title={product?.params.ModelName}
-        items={[]}
         categories={{
           id: categoryId,
           category: { name: product?.params["Приналежність до категорії"] },

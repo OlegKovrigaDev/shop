@@ -16,6 +16,15 @@ import {
 } from "../../ui/sheet";
 import { Skeleton } from "../../ui/skeleton";
 
+const getCategoryNameByLanguage = (
+  category: сategory,
+  language: "UA" | "RU"
+): string => {
+  const names = category.name.split("_");
+
+  return language === "UA" ? names[0] : names[1];
+};
+
 export const Menu = ({
   title,
   className,
@@ -27,6 +36,7 @@ export const Menu = ({
     (state: RootState) => state.categories
   );
   const [openCategories, setOpenCategories] = useState<string[]>([]);
+  const language = "UA"; // Replace with the current language
 
   useEffect(() => {
     allMainAndSubCategories();
@@ -49,7 +59,9 @@ export const Menu = ({
             onClick={() => toggleCategory(category.id)}
             className="flex items-center gap-2 p-2 bg-white rounded-md shadow hover:bg-gray-100 transition cursor-pointer"
           >
-            <p className="text-base font-medium">{category.name}</p>
+            <p className="text-base font-medium">
+              {getCategoryNameByLanguage(category, language)}
+            </p>
           </div>
           {openCategories.includes(category.id) && category.subcategories && (
             <ul className="ml-4">
@@ -58,7 +70,7 @@ export const Menu = ({
                   <Link href={`/category/${subCategory.id}`}>
                     <div className="flex items-center gap-2 p-2 bg-white rounded-md shadow hover:bg-gray-100 transition cursor-pointer">
                       <p className="text-base font-medium">
-                        {subCategory.name}
+                        {getCategoryNameByLanguage(subCategory, language)}
                       </p>
                     </div>
                   </Link>

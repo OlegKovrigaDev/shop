@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const axiosClient = axios.create({
-  baseURL: "https://teramebli-api.onrender.com/api",
-});
+const API_URL = "https://teramebli-api.onrender.com/api";
 
-export default axiosClient;
+export const axiosClient = axios.create({
+  baseURL: API_URL,
+});

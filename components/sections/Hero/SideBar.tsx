@@ -6,6 +6,15 @@ import { useSelector } from "react-redux";
 import { useActions } from "@/hooks/useActions";
 import { RootState } from "@/lib/store";
 
+const getCategoryNameByLanguage = (
+  category: Category,
+  language: "UA" | "RU"
+): string => {
+  const names = category.name.split("_");
+
+  return language === "UA" ? names[0] : names[1];
+};
+
 export const SideBar = () => {
   const { allMainAndSubCategories } = useActions();
   const { categories, loading, error } = useSelector(
@@ -33,17 +42,20 @@ export const SideBar = () => {
     return <p className="min-w-72">Ошибка: {error}</p>;
   }
 
+  const language = "UA";
   const renderMainCategories = () => {
     return categories
       .filter((category) => category.parentId === null)
-      .slice(0, 8)
+      .slice(0, 10)
       .map((category) => (
         <li key={category.id} className="flex flex-col">
           <div className="flex items-center gap-2 p-2  transition">
             {/* Icon */}
             <div className="h-6 w-6 bg-gray-300 rounded-full"></div>
             <Link href={`/category/${category.id}`}>
-              <p className="text-base font-medium">{category.name}</p>
+              <p className="text-base font-medium">
+                {getCategoryNameByLanguage(category, language)}
+              </p>
             </Link>
           </div>
         </li>

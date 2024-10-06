@@ -5,8 +5,8 @@ export type TProductCard = {
   id?: string;
   img?: string;
   title?: string;
-  oldPrice?: string;
-  newPrice?: string;
+  oldPrice?: string | number;
+  newPrice?: string | number;
   hit?: boolean;
   discont?: boolean;
   newProduct?: boolean;
@@ -33,12 +33,23 @@ export type TLayout = {
 };
 
 export type TCrumbs = {
+  id:string
   categories?: TCategoriesItem;
   category?: string;
   subcategories?: TCategoriesItem[];
   title?: string;
   items?: TItems[];
   isProductPage: boolean;
+  mainCategory?: {
+    name?: string;
+    id?: number;
+    parentId?: number | null;
+  };
+  subCategory?: {
+    name?: string;
+    id?: number;
+    parentId?: number | null;
+  };
 };
 
 type TCategoriesItem = {
@@ -83,6 +94,7 @@ export type TItemLang = {
 export type CategoryPageProps = {
   params: {
     id: TCategory;
+    parentId: TCategory;
   };
 };
 
@@ -155,9 +167,9 @@ export type TItems = {
 };
 
 export type TCategory = {
-  id: string;
+  id: number;
   name: string;
-  parentId: string | null;
+  parentId: string | number | null;
   subcategoryIds: TCategory[];
   items: TItems[];
 };

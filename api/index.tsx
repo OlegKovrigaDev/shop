@@ -4,7 +4,18 @@ import {
   TCategoryWithSubcategories,
   TItems,
 } from "@/types/reduxTypes";
-import axiosClient from "./axios";
+import { axiosClient } from "./axios";
+
+export const AllMainCategories = async (): Promise<
+  TCategoryWithSubcategories[]
+> => {
+  const response = await axiosClient.get<TCategory[]>("/category");
+  const mainCategories = response.data.filter(
+    (category) => category.parentId === null || category.parentId === undefined
+  );
+
+  return mainCategories;
+};
 
 export const AllMainAndSubCategories = async (): Promise<
   TCategoryWithSubcategories[]
@@ -46,7 +57,7 @@ export const fetchCategoryItems = async (
 
 export const fetchCategoryId = async (id: string): Promise<TCategory> => {
   const { data } = await axiosClient.get<TCategory>(`/category/${id}`);
-  console.log({data});
+  console.log({ data });
 
   return data;
 };

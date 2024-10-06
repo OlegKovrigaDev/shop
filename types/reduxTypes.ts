@@ -7,6 +7,7 @@ export type TItem = {
 
 export type TItems = {
   offerId: string;
+  categoryId: string;
   params: ProductParams;
 };
 
@@ -103,5 +104,4 @@ export interface TCategoryWithSubcategories {
   name: string;
   parentId: string | null;
   subcategories: TCategory[];
-  
 }
