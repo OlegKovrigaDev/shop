@@ -3,7 +3,7 @@ import { Product } from "@/types";
 import { getProductById } from "@/api";
 
 interface ProductState {
-  product: Product 
+  product: Product | null;
   loading: boolean;
   error: string | null;
 }
@@ -14,10 +14,19 @@ const initialState: ProductState = {
   error: null,
 };
 
+// Async thunk to fetch a product by its offerId
 export const getProductByOfferId = createAsyncThunk<Product, string>(
   "product/fetchProductByOfferId",
-  async (offerId) => {
-    return await getProductById(offerId);
+  async (offerId, { rejectWithValue }) => {
+    try {
+      if (!offerId) {
+        throw new Error("Offer ID is required.");
+      }
+      const response = await getProductById(offerId);
+      return response;
+    } catch (error: any) {
+      return rejectWithValue(error.message || "Failed to fetch product.");
+    }
   }
 );
 
@@ -43,10 +52,13 @@ const productSlice = createSlice({
           state.loading = false;
         }
       )
-      .addCase(getProductByOfferId.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message ?? "Error fetching product";
-      });
+      .addCase(
+        getProductByOfferId.rejected,
+        (state, action: PayloadAction<any>) => {
+          state.loading = false;
+          state.error = action.payload || "Error fetching product";
+        }
+      );
   },
 });
 

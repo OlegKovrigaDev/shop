@@ -7,6 +7,7 @@ export const makeStore = () => {
     reducer: {
       categories: categoryReducer,
       product: productReducer,
+      cart: categoryReducer,
     },
   });
 };
