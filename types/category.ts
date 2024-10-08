@@ -6,4 +6,5 @@ export type ProductListProps = {
     params: ProductParams;
   }[];
   categoryId: string;
+  
 };

@@ -10,12 +10,7 @@ import {
 } from "../ui/breadcrumb";
 import { TCrumbs } from "@/types";
 
-export const CrumbsLink = ({
-  categories,
-  id,
-  title,
-  isProductPage,
-}: TCrumbs) => {
+export const CrumbsLink = ({ categories, title }: TCrumbs) => {
   return (
     <Breadcrumb className="py-7">
       <BreadcrumbList className="text-lg">
@@ -29,7 +24,7 @@ export const CrumbsLink = ({
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
               <Link href={`/category/${categories?.id}`}>
-                {categories?.category.name}
+                {categories?.id && categories?.name}
               </Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
@@ -37,12 +32,12 @@ export const CrumbsLink = ({
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
-            <Link href={`/category/sub${categories?.id}`}>
-              {categories?.id}
+            <Link href={`/category/${categories?.id}`}>
+              {categories?.name}
             </Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        {isProductPage && title && (
+        {title && (
           <>
             <BreadcrumbSeparator />
             <BreadcrumbPage>

@@ -1,55 +1,31 @@
 "use client";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { CrumbsLink } from "@/components/parts/CrumbsLink";
-import { RootState } from "@/lib/store";
-import { CategoryPageProps } from "@/types";
-import { useActions } from "@/hooks/useActions";
 import { FilterAccordionComponent } from "@/components/category/FilterAccordionItem";
 import { ProductList } from "@/components/category/ProductList";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
+import { useActions } from "@/hooks/useActions";
+import { mainCategories } from "@/lib/slices/categorySlice";
 
-const CategoryPage = ({ params }: CategoryPageProps) => {
+const CategoryPage = ({ params }: { params: { id: string } }) => {
   const { id } = params;
-  const { categoryById, categoryItemsById } = useActions();
-
-  const { categoryDetails, items, loading, error } = useSelector(
+  const { categories, categoryDetails, items } = useSelector(
     (state: RootState) => state.categories
   );
+  const { categoryById, categoryItemsById } = useActions();
 
   useEffect(() => {
-    categoryById(id.toString());
-    categoryItemsById(id.toString());
+    categoryById(id);
+    categoryItemsById(id);
   }, [id, categoryById, categoryItemsById]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
-  if (!categoryDetails || !items) {
-    return <div>Нет данных</div>;
-  }
 
   return (
     <div className="mb-[75px]">
-      {categoryDetails && (
-        <CrumbsLink
-          categories={categoryDetails}
-          isProductPage={false}
-          title=""
-          items={[]}
-        />
-      )}
-
+      <CrumbsLink isProductPage={false} categories={categoryDetails} />
       <div className="flex flex-col gap-8 md:flex-row md:justify-between">
-        {/* Filters Accordion */}
         <FilterAccordionComponent />
-
-        {/* Product List */}
-        <ProductList items={items} categoryId={id.toString()} />
+        <ProductList items={items} categoryId={id} />
       </div>
     </div>
   );

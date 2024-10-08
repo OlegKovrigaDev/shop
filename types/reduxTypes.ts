@@ -9,17 +9,20 @@ export type TItems = {
   offerId: string;
   categoryId: string;
   params: ProductParams;
+  id: string;
+  title: string;
+  price: number;
 };
 
 export type TCategory = {
-  category: string;
+  category?: string;
   id: string;
   name: string;
   parentId: string | null;
-  items: TItems[];
-  products: TItems[];
-  subcategoryId: number | null;
-  subcategories: TCategory[];
+  items?: TItems[];
+  products?: TItems[];
+  subcategoryId?: number | null;
+  subcategories?: TCategory[];
 };
 
 export type TProduct = {
@@ -104,4 +107,5 @@ export interface TCategoryWithSubcategories {
   name: string;
   parentId: string | null;
   subcategories: TCategory[];
+  parentCategory?: TCategory; 
 }

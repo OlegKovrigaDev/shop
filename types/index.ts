@@ -33,7 +33,6 @@ export type TLayout = {
 };
 
 export type TCrumbs = {
-  id:string
   categories?: TCategoriesItem;
   category?: string;
   subcategories?: TCategoriesItem[];
@@ -55,12 +54,8 @@ export type TCrumbs = {
 type TCategoriesItem = {
   id: string;
   subcategories?: TCategoriesItem[];
-  name?: string;
-  category: {
-    name?: string | undefined;
-    id?: string | undefined;
-    parentId?: string | null | undefined;
-  };
+  name: string;
+  parentId: string | number | null;
 };
 
 export type TSideBar = {
@@ -176,6 +171,8 @@ export type TCategory = {
 
 export type Product = {
   offerId: string;
+  available: boolean;
+  categoryId: string;
   params: {
     Articul: string;
     RetailPrice: string;

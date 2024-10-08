@@ -11,7 +11,6 @@ const getCategoryNameByLanguage = (
   language: "UA" | "RU"
 ): string => {
   const names = category.name.split("_");
-
   return language === "UA" ? names[0] : names[1];
 };
 
@@ -39,17 +38,18 @@ export const SideBar = () => {
   }
 
   if (error) {
-    return <p className="min-w-72">Ошибка: {error}</p>;
+    return <p className="min-w-72 text-red-600">Ошибка: </p>;
   }
 
   const language = "UA";
+
   const renderMainCategories = () => {
     return categories
       .filter((category) => category.parentId === null)
       .slice(0, 10)
       .map((category) => (
         <li key={category.id} className="flex flex-col">
-          <div className="flex items-center gap-2 p-2  transition">
+          <div className="flex items-center gap-2 p-2 transition">
             {/* Icon */}
             <div className="h-6 w-6 bg-gray-300 rounded-full"></div>
             <Link href={`/category/${category.id}`}>
@@ -64,7 +64,7 @@ export const SideBar = () => {
 
   return (
     <div className="w-full max-w-full max-h-[80vh] p-1">
-      {renderMainCategories()}
+      <ul>{renderMainCategories()}</ul>
     </div>
   );
 };

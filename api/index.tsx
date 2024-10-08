@@ -9,7 +9,9 @@ import { axiosClient } from "./axios";
 export const AllMainCategories = async (): Promise<
   TCategoryWithSubcategories[]
 > => {
-  const response = await axiosClient.get<TCategory[]>("/category");
+  const response = await axiosClient.get<TCategoryWithSubcategories[]>(
+    "/category"
+  );
   const mainCategories = response.data.filter(
     (category) => category.parentId === null || category.parentId === undefined
   );

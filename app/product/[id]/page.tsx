@@ -34,11 +34,10 @@ const ProductPage = ({
   return (
     <>
       <CrumbsLink
-        isProductPage={true}
         title={product?.params.ModelName}
         categories={{
           id: categoryId,
-          category: { name: product?.params["Приналежність до категорії"] },
+          name: product?.params["Приналежність до категорії"],
         }}
       />
       <div className="flex justify-between">

@@ -3,7 +3,7 @@ import { Product } from "@/types";
 import { getProductById } from "@/api";
 
 interface ProductState {
-  product: Product | null;
+  product: Product 
   loading: boolean;
   error: string | null;
 }

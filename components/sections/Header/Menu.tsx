@@ -17,11 +17,10 @@ import {
 import { Skeleton } from "../../ui/skeleton";
 
 const getCategoryNameByLanguage = (
-  category: сategory,
+  category: Category,
   language: "UA" | "RU"
 ): string => {
   const names = category.name.split("_");
-
   return language === "UA" ? names[0] : names[1];
 };
 
@@ -35,19 +34,20 @@ export const Menu = ({
   const { categories, loading, error } = useSelector(
     (state: RootState) => state.categories
   );
+
   const [openCategories, setOpenCategories] = useState<string[]>([]);
-  const language = "UA"; // Replace with the current language
+  const language = "UA"; // Replace with dynamic language if necessary
 
   useEffect(() => {
     allMainAndSubCategories();
   }, [allMainAndSubCategories]);
 
   const toggleCategory = (categoryId: string) => {
-    if (openCategories.includes(categoryId)) {
-      setOpenCategories(openCategories.filter((id) => id !== categoryId));
-    } else {
-      setOpenCategories([...openCategories, categoryId]);
-    }
+    setOpenCategories((prev) =>
+      prev.includes(categoryId)
+        ? prev.filter((id) => id !== categoryId)
+        : [...prev, categoryId]
+    );
   };
 
   const renderCategories = (parentId: string | null) => {
@@ -66,7 +66,7 @@ export const Menu = ({
           {openCategories.includes(category.id) && category.subcategories && (
             <ul className="ml-4">
               {category.subcategories.map((subCategory) => (
-                <li key={subCategory.id} className="flex flex-col">
+                <li key={subCategory.id}>
                   <Link href={`/category/${subCategory.id}`}>
                     <div className="flex items-center gap-2 p-2 bg-white rounded-md shadow hover:bg-gray-100 transition cursor-pointer">
                       <p className="text-base font-medium">
@@ -100,7 +100,7 @@ export const Menu = ({
           </span>
         </Button>
       </SheetTrigger>
-      <SheetContent side={"left"} className="w-screen max-w-full">
+      <SheetContent side="left" className="w-screen max-w-full">
         <SheetHeader>
           <SheetTitle>
             <Logo />
